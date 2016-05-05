@@ -23,7 +23,7 @@ import java.util.List;
 public class FlashActivity extends AppCompatActivity {
     TextView txtVersion;
     ProgressBar pbStart;
-    List<TClasses> tcList;
+    //List<TClasses> tcList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +44,11 @@ public class FlashActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 SystemClock.sleep(3000);
                 handler.sendEmptyMessage(1);
             }
         }).start();
-
     }
 
     protected void initControl()
@@ -83,7 +83,6 @@ public class FlashActivity extends AppCompatActivity {
                     }
                     break;
             }
-
             startActivity(intent);
             FlashActivity.this.finish();
         }

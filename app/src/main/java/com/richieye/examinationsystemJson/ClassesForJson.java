@@ -22,7 +22,7 @@ import java.util.concurrent.Future;
 /**
  * Created by RichieYe on 2016/4/14.
  */
-public class ClassesOperator
+public class ClassesForJson
 {
     final static String CLASSES_WEB_SERVICE_NAME="Classes_Operator.asmx";
 
@@ -30,13 +30,13 @@ public class ClassesOperator
 
     Context context;
 
-    public ClassesOperator(Context context)
+    public ClassesForJson(Context context)
     {
         this.context=context;
         isNetwork=true;
     }
 
-    public ClassesOperator(Context context,boolean isNetwork)
+    public ClassesForJson(Context context,boolean isNetwork)
     {
         this.context=context;
         this.isNetwork=isNetwork;
