@@ -44,6 +44,7 @@ public class FlashActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 SystemClock.sleep(3000);
                 handler.sendEmptyMessage(1);
             }
@@ -83,7 +84,6 @@ public class FlashActivity extends AppCompatActivity {
                     }
                     break;
             }
-
             startActivity(intent);
             FlashActivity.this.finish();
         }
