@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.richieye.examinationsystem.RegisterActivity">
+
+    <TextView
+        android:id="@+id/txtRegHeadMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:text="请选择一张图片做为头像！"/>
+
+    <TextView
+        android:id="@+id/txtRegHeadImagePath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/txtRegHeadMsg"
+        android:layout_toEndOf="@+id/txtRegHeadMsg"
+        android:visibility="gone"
+        />
+
+    <com.richieye.examinationsystemCustomControl.CustomRoundImageView
+        android:id="@+id/ivRegHead"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerInside"
+        imagecontrol:border_inside_color="#000"
+        imagecontrol:border_outside_color="#000"
+        imagecontrol:border_thickness="1dp"
+        android:src="@mipmap/default_head"/>
+
+    <TextView
+        android:id="@+id/txtRegClassMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivRegHead"
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@mipmap/login_class"
+        android:text="班级："
+        android:textAlignment="center"
+        android:textSize="18dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txtRegClassMsg"
+        android:layout_toEndOf="@+id/txtRegClassMsg"
+        android:layout_toRightOf="@+id/txtRegClassMsg"
+        android:id="@+id/spinner">
+    </Spinner>
+
+    <LinearLayout
+        android:id="@+id/llRegUserNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtRegClassMsg"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etEditUserNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@mipmap/login_no"
+            android:inputType="number"
+            android:hint="请输入学号！" />
+
+        <ImageView
+            android:id="@+id/ivRegUserNoErr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/login_error"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRegUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/llRegUserNo">
+
+        <EditText
+            android:id="@+id/etRegUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="请输入用户名！"
+            android:drawableLeft="@mipmap/login_user"/>
+
+        <ImageView
+            android:id="@+id/ivRegUserNameErr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:src="@mipmap/login_error"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRegUserPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llRegUserName"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etRegUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@mipmap/login_password"
+            android:inputType="textPassword"
+            android:hint="请输入密码！"
+            />
+
+        <ImageView
+            android:id="@+id/ivRegUserPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:src="@mipmap/login_error"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRegUserAgainPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/llRegUserPassword">
+
+        <EditText
+            android:id="@+id/etRegUserPasswordAgain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@mipmap/login_password"
+            android:inputType="textPassword"
+            android:hint="请再一次输入密码！"
+            />
+
+        <ImageView
+            android:id="@+id/ivRegUserPasswordAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:src="@mipmap/login_error"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnRegOK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/llRegUserAgainPassword"
+        android:text="注册"/>
+
+</RelativeLayout>

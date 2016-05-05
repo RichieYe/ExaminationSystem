@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">在线考试系统</string>
+    <string name="login_classname">班级：</string>
+    <string name="login_user_no">请输入学号！</string>
+    <string name="login_user_name">请输入姓名！</string>
+    <string name="login_user_pwd">请输入密码！</string>
+    <string name="login_user_local">本机数据库</string>
+    <string name="login_user_network">网络数据库</string>
+    <string name="login_user_reg_msg1">还没有账号？</string>
+    <string name="login_user_reg_msg2"><u>注册账号</u></string>
+    <string name="str_login">登录</string>
+    <string name="str_ok">确定</string>
+    <string name="str_cancel">取消</string>
+    <string name="login_remember_user">记住用户名</string>
+
+</resources>
