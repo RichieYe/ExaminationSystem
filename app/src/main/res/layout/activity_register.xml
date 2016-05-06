@@ -4,7 +4,6 @@
     xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -15,9 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:textSize="15dp"
-        android:text="请选择一张图片做为头像！"/>
+        android:text="请选择一张图片做为头像！\n   (长按头像可进行更改！)"/>
 
     <TextView
         android:id="@+id/txtRegHeadImagePath"
@@ -32,7 +31,7 @@
         android:id="@+id/ivRegHead"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="36dp"
         android:layout_centerHorizontal="true"
         android:scaleType="centerInside"
         imagecontrol:border_inside_color="#000"
@@ -57,7 +56,7 @@
         android:layout_alignTop="@+id/txtRegClassMsg"
         android:layout_toEndOf="@+id/txtRegClassMsg"
         android:layout_toRightOf="@+id/txtRegClassMsg"
-        android:id="@+id/spinner">
+        android:id="@+id/spRegClassName">
     </Spinner>
 
     <LinearLayout
@@ -69,7 +68,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/etEditUserNo"
+            android:id="@+id/etRegUserNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -114,10 +113,51 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llRegUserPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llRegUserName"
+        android:orientation="horizontal"
+        android:id="@+id/llRegUserGender"
+        android:layout_margin="0dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:drawableLeft="@mipmap/login_user"
+            android:textSize="18dp"
+            android:text="性别："/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:id="@+id/rbRegMale"
+                android:text="男"
+                android:layout_weight="1"
+                android:checked="true"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rbRegFemale"
+                android:layout_weight="1"
+                android:textSize="18dp"
+                android:text="女"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRegUserPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llRegUserGender"
         android:orientation="horizontal">
 
         <EditText
@@ -167,12 +207,43 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llRegUserPhone"
+        android:orientation="horizontal"
+        android:layout_below="@+id/llRegUserAgainPassword">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:id="@+id/etRegUserPhone"
+            android:hint="请输入手机号码！"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llRegUserAddress"
+        android:layout_below="@+id/llRegUserPhone"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etRegUserAddress"
+            android:hint="请输入地址！"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnRegOK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/llRegUserAgainPassword"
-        android:text="注册"/>
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/llRegUserAddress"
+        android:text="注册"
+        android:textSize="18dp"/>
 
 </RelativeLayout>

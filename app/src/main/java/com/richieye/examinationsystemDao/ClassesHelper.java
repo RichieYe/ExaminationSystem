@@ -28,35 +28,7 @@ public class ClassesHelper {
 
     public void InsertForService(List<Map<String,String>> list)
     {
-        List<Map<String,String>> params=new ArrayList<Map<String,String>>();
-
-        /*
-        if(list!=null&&!list.isEmpty())
-        {
-           params.addAll(list);
-        }
-        */
-
         helper.Replace("tb_Classes",list);
-
-        Log.e("ClassesHelper","插入成功！！");
-
-        /*
-        if(list!=null&&!list.isEmpty())
-        {
-            for(TClasses tc:list)
-            {
-                Map<String,String> map=new HashMap<String,String>();
-                map.put("_id",tc.getID()+"");
-                map.put("ClassName",tc.getClassName());
-
-                params.add(map);
-            }
-
-            helper.Replace("tb_Classes",params);
-            Log.e("ClassesHelper","插入成功！！");
-        }
-        */
     }
 
     public List<Map<String,String>> getClasses()
@@ -72,7 +44,6 @@ public class ClassesHelper {
             for(int i=0;i<myCursor.getCount();i++)
             {
                 myCursor.moveToPosition(i);
-                Log.e("ClassesHelper",i+"          "+myCursor.getCount());
                 Map<String,String> map=new HashMap<String,String>();
                 map.put("ID",myCursor.getInt(myCursor.getColumnIndex("_id"))+"");
                 map.put("ClassName",myCursor.getString(myCursor.getColumnIndex("ClassName")));
