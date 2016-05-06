@@ -26,6 +26,8 @@ public class ClassesForJson
 {
     final static String CLASSES_WEB_SERVICE_NAME="Classes_Operator.asmx";
 
+    public static String CLASSES_OPERATOR_GETALLCLASSES="GetAllClasses";
+
     boolean isNetwork=true;
 
     Context context;
@@ -88,7 +90,7 @@ public class ClassesForJson
             {
                 JSONObject obj=array.getJSONObject(i);
                 Map<String,String>map=new HashMap<String,String>();
-                map.put("ID",obj.getString("Id"));
+                map.put("_id",obj.getString("Id"));
                 map.put("ClassName",obj.getString("ClassName"));
                 list.add(map);
             }
@@ -113,7 +115,7 @@ public class ClassesForJson
                     tc.setClassName(map.get("ClassName"));
                     tcList.add(tc);
                 }
-                new ClassesHelper(context).InsertForService(tcList);
+                //new ClassesHelper(context).InsertForService(tcList);
             }
         }).start();
     }

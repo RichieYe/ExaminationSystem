@@ -3,7 +3,7 @@ package com.richieye.examinationsystemDao;
 import android.content.Context;
 import android.util.Log;
 
-import com.richieye.examinationsystemJson.ClassesOperator;
+import com.richieye.examinationsystemJson.ClassesForJson;
 import com.richieye.examinationsystemModel.TClasses;
 
 import java.util.ArrayList;
@@ -25,10 +25,20 @@ public class ClassesHelper {
         helper=new DBHelper(context);
     }
 
-    public void InsertForService(List<TClasses> list)
+    public void InsertForService(List<Map<String,String>> list)
     {
         List<Map<String,String>> params=new ArrayList<Map<String,String>>();
 
+        if(list!=null&&!list.isEmpty())
+        {
+           params.addAll(list);
+        }
+
+        helper.Replace("tb_Classes",params);
+
+        Log.e("ClassesHelper","插入成功！！");
+
+        /*
         if(list!=null&&!list.isEmpty())
         {
             for(TClasses tc:list)
@@ -43,6 +53,7 @@ public class ClassesHelper {
             helper.Replace("tb_Classes",params);
             Log.e("ClassesHelper","插入成功！！");
         }
+        */
     }
 
 }

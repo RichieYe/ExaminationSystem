@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationsystemModel.TClasses;
 import com.richieye.examinationsystemNetwork.NetWorkOperator;
 
@@ -39,16 +40,23 @@ public class FlashActivity extends AppCompatActivity {
 
         if(!NetWorkOperator.isNetworkAvailable(this)) {
             Toast.makeText(this, "没有网络连接！应用程序将使用本地数据库！", Toast.LENGTH_LONG).show();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    SystemClock.sleep(3000);
+                }
+            }).start();
+        }else
+        {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    new ClassesOperator(FlashActivity.this).getDataForServer();
+                }
+            }).start();
         }
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                SystemClock.sleep(3000);
-                handler.sendEmptyMessage(1);
-            }
-        }).start();
+        handler.sendEmptyMessage(1);
     }
 
     protected void initControl()
