@@ -71,10 +71,10 @@ public class ClassesHelper {
 
             for(int i=0;i<myCursor.getCount();i++)
             {
-                myCursor.move(i);
-
+                myCursor.moveToPosition(i);
+                Log.e("ClassesHelper",i+"          "+myCursor.getCount());
                 Map<String,String> map=new HashMap<String,String>();
-                map.put("ID",myCursor.getString(myCursor.getColumnIndex("_id")));
+                map.put("ID",myCursor.getInt(myCursor.getColumnIndex("_id"))+"");
                 map.put("ClassName",myCursor.getString(myCursor.getColumnIndex("ClassName")));
 
                 list.add(map);

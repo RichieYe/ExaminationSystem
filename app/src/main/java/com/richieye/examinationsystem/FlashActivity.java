@@ -45,6 +45,7 @@ public class FlashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     SystemClock.sleep(3000);
+                    handler.sendEmptyMessage(1);
                 }
             }).start();
         }else
@@ -53,10 +54,11 @@ public class FlashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     new ClassesOperator(FlashActivity.this).getDataForServer();
+                    handler.sendEmptyMessage(1);
                 }
             }).start();
         }
-        handler.sendEmptyMessage(1);
+
     }
 
     protected void initControl()

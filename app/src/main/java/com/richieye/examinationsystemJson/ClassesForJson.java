@@ -97,7 +97,7 @@ public class ClassesForJson
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        InsertForService(list);
+       // InsertForService(list);
         return list;
     }
 
