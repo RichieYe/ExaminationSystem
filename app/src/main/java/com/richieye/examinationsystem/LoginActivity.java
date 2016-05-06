@@ -19,9 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.richieye.examinationCommon.Common;
-import com.richieye.examinationsystemJson.ClassesOperator;
 import com.richieye.examinationsystemModel.TClasses;
 import com.richieye.examinationsystemNetwork.MyThread;
+import com.richieye.examinationOperator.ClassesOperator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,17 +44,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Intent intent=getIntent();
-
-        if(intent!=null)
-        {
-            strClassesJson=intent.getStringExtra("ClassName");
-            if(!"".equals(strClassesJson.trim()))
-            {
-                ClassesOperator operator=new ClassesOperator(this,false);
-                list=operator.getClasses(strClassesJson);
-            }
-        }
         init();
     }
 
@@ -93,10 +82,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void init_Spinner()
     {
-        SimpleAdapter adapter=new SimpleAdapter(this, list,R.layout.spinner_item,new String[]{"ID","ClassName"},
-                new int[]{R.id.txtSpinnerItem_ID,R.id.txtSpinnerItem_ClassName});
-        adapter.setDropDownViewResource(R.layout.spinner_item);
-        spClasses.setAdapter(adapter);
+        ClassesOperator operator=new ClassesOperator(this);
+        list=operator.getClasses();
+        if(list!=null) {
+            SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.spinner_item, new String[]{"ID", "ClassName"},
+                    new int[]{R.id.txtSpinnerItem_ID, R.id.txtSpinnerItem_ClassName});
+            adapter.setDropDownViewResource(R.layout.spinner_item);
+            spClasses.setAdapter(adapter);
+        }
     }
 
     private TextWatcher watcher=new TextWatcher() {

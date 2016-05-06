@@ -5,6 +5,7 @@ import android.content.Context;
 import com.richieye.examinationsystemDao.ClassesHelper;
 import com.richieye.examinationsystemJson.ClassesForJson;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,5 +27,10 @@ public class ClassesOperator {
         List<Map<String,String>> list=cJson.getClasses(ClassesForJson.CLASSES_OPERATOR_GETALLCLASSES,null);
 
         helper.InsertForService(list);
+    }
+
+    public List<Map<String,String>> getClasses()
+    {
+        return helper.getClasses();
     }
 }

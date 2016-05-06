@@ -88,9 +88,18 @@ public class DBHelper extends SQLiteOpenHelper
         }
     }
 
-    public Cursor Select(int ID)
+    public Cursor Select(String tbName,int ID)
     {
-        return null;
+        String strWhere=null;
+        String strArgs[]=null;
+
+        if(ID!=0)
+        {
+            strWhere="_id=?";
+            strArgs=new String[]{ID+""};
+        }
+
+        return this.getReadableDatabase().query(tbName,null,strWhere,strArgs,null,null,null);
     }
 
     public Cursor Select(String strSql,List<Map<String,String>> params)

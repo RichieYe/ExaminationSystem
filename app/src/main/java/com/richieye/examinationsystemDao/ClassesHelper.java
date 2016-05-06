@@ -1,6 +1,7 @@
 package com.richieye.examinationsystemDao;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.richieye.examinationsystemJson.ClassesForJson;
@@ -29,12 +30,14 @@ public class ClassesHelper {
     {
         List<Map<String,String>> params=new ArrayList<Map<String,String>>();
 
+        /*
         if(list!=null&&!list.isEmpty())
         {
            params.addAll(list);
         }
+        */
 
-        helper.Replace("tb_Classes",params);
+        helper.Replace("tb_Classes",list);
 
         Log.e("ClassesHelper","插入成功！！");
 
@@ -54,6 +57,30 @@ public class ClassesHelper {
             Log.e("ClassesHelper","插入成功！！");
         }
         */
+    }
+
+    public List<Map<String,String>> getClasses()
+    {
+        List<Map<String,String>>list=new ArrayList<Map<String,String>>();
+
+        Cursor myCursor=helper.Select("tb_Classes",0);
+
+        if(myCursor!=null&&myCursor.getCount()>0)
+        {
+            myCursor.moveToFirst();
+
+            for(int i=0;i<myCursor.getCount();i++)
+            {
+                myCursor.move(i);
+
+                Map<String,String> map=new HashMap<String,String>();
+                map.put("ID",myCursor.getString(myCursor.getColumnIndex("_id")));
+                map.put("ClassName",myCursor.getString(myCursor.getColumnIndex("ClassName")));
+
+                list.add(map);
+            }
+        }
+        return list;
     }
 
 }
