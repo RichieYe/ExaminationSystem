@@ -2,6 +2,8 @@ package com.richieye.examinationsystem;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +20,7 @@ import com.richieye.examinationsystemCustomControl.CustomRoundImageView;
 import java.util.List;
 import java.util.Map;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements TextWatcher {
 
     EditText etUserNo,etUserName,etUserPassword,etUserPasswordAgain;
     ImageView ivUserNoErr,ivUserNameErr,ivUserPasswordErr,ivUserPasswordAgainErr;
@@ -42,9 +44,13 @@ public class RegisterActivity extends AppCompatActivity {
     private void init()
     {
         etUserNo=(EditText)findViewById(R.id.etRegUserNo);
+        etUserNo.addTextChangedListener(this);
         etUserName=(EditText)findViewById(R.id.etRegUserName);
+        etUserName.addTextChangedListener(this);
         etUserPassword=(EditText)findViewById(R.id.etRegUserPassword);
+        etUserPassword.addTextChangedListener(this);
         etUserPasswordAgain=(EditText)findViewById(R.id.etRegUserPasswordAgain);
+        etUserPasswordAgain.addTextChangedListener(this);
         ivUserNoErr=(ImageView)findViewById(R.id.ivRegUserNoErr);
         ivUserNameErr=(ImageView)findViewById(R.id.ivRegUserNameErr);
         ivUserPasswordErr=(ImageView)findViewById(R.id.ivRegUserPassword);
@@ -125,4 +131,48 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if(!etUserNo.getText().toString().trim().equals(""))
+        {
+            ivUserNoErr.setVisibility(View.GONE);
+        }
+
+        if(!etUserName.getText().toString().trim().equals(""))
+        {
+            ivUserNameErr.setVisibility(View.GONE);
+        }
+
+        if(!etUserPassword.getText().toString().trim().equals(""))
+        {
+            ivUserPasswordErr.setVisibility(View.GONE);
+        }
+
+        if(!etUserPasswordAgain.getText().toString().trim().equals(""))
+        {
+            ivUserPasswordAgainErr.setVisibility(View.GONE);
+        }
+
+        if((!etUserPassword.getText().toString().trim().equals(""))&&
+                etUserPassword.getText().toString().trim().equals(etUserPasswordAgain.getText().toString().trim()))
+        {
+            ivUserPasswordErr.setVisibility(View.GONE);
+            ivUserPasswordAgainErr.setVisibility(View.GONE);
+        }else
+        {
+            ivUserPasswordAgainErr.setVisibility(View.VISIBLE);
+        }
+
+    }
 }
