@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationsystemCustomControl.CustomRoundImageView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -84,6 +86,11 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
                return;
            }
 
+
+
+            List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+            Map<String,String> map=new HashMap<String,String>();
+            map.put("UserName",etUserName.getText().toString().trim());
         }
     };
 
