@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationsystemModel.TClasses;
 import com.richieye.examinationsystemNetwork.NetWorkOperator;
+import com.richieye.examinationSystemIO.PreferencesOperator;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class FlashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     SystemClock.sleep(3000);
+                    PreferencesOperator.saveNetworkState(FlashActivity.this,false);
                     handler.sendEmptyMessage(1);
                 }
             }).start();
@@ -54,6 +56,7 @@ public class FlashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     new ClassesOperator(FlashActivity.this).getDataForServer();
+                    PreferencesOperator.saveNetworkState(FlashActivity.this,true);
                     handler.sendEmptyMessage(1);
                 }
             }).start();

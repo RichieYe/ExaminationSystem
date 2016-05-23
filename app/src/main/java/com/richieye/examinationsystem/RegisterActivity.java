@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.richieye.examinationOperator.ClassesOperator;
+import com.richieye.examinationOperator.UserOperator;
 import com.richieye.examinationsystemCustomControl.CustomRoundImageView;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
     Spinner spClass;
 
     ClassesOperator cOperator;
+    UserOperator uOperator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
         setContentView(R.layout.activity_register);
 
         cOperator=new ClassesOperator(this);
-
+        uOperator=new UserOperator(this);
         init();
     }
 
@@ -47,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
     {
         etUserNo=(EditText)findViewById(R.id.etRegUserNo);
         etUserNo.addTextChangedListener(this);
+        etUserNo.setOnFocusChangeListener(etUserNoFocusChangeListener);
         etUserName=(EditText)findViewById(R.id.etRegUserName);
         etUserName.addTextChangedListener(this);
         etUserPassword=(EditText)findViewById(R.id.etRegUserPassword);
@@ -91,6 +94,16 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
             List<Map<String,String>> list=new ArrayList<Map<String,String>>();
             Map<String,String> map=new HashMap<String,String>();
             map.put("UserName",etUserName.getText().toString().trim());
+        }
+    };
+
+    private View.OnFocusChangeListener etUserNoFocusChangeListener=new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if(!hasFocus)
+            {
+                Log.e("RegisterActivity","11111111");
+            }
         }
     };
 
