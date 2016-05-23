@@ -35,6 +35,8 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
     ClassesOperator cOperator;
     UserOperator uOperator;
 
+    boolean isExistsNO=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,12 +86,10 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
     private View.OnClickListener listener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-           if(CheckControl())
+           if(CheckControl()||isExistsNO)
            {
                return;
            }
-
-
 
             List<Map<String,String>> list=new ArrayList<Map<String,String>>();
             Map<String,String> map=new HashMap<String,String>();
@@ -102,7 +102,18 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
         public void onFocusChange(View v, boolean hasFocus) {
             if(!hasFocus)
             {
-                Log.e("RegisterActivity","11111111");
+                if(uOperator.checkStudentNo(etUserNo.getText().toString().trim()))
+                {
+                    Log.e("RegisterActivity",uOperator.checkStudentNo(etUserNo.getText().toString().trim())+"");
+                    Toast.makeText(RegisterActivity.this,"学号："+etUserNo.getText()
+                            +",已经被注册了！请检查一下你的学号！或与管理员联系！谢谢！！",Toast.LENGTH_LONG).show();
+                    ivUserNoErr.setVisibility(View.VISIBLE);
+                    isExistsNO=true;
+                }else
+                {
+                    isExistsNO=false;
+                }
+                Log.e("RegisterActivity",uOperator.checkStudentNo(etUserNo.getText().toString().trim())+"");
             }
         }
     };

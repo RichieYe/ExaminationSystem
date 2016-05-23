@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
  * Created by RichieYe on 2016/5/23.
  */
 public class PreferencesOperator {
-    private final String FILE_NAME="AppSets";
+    private final static String FILE_NAME="AppSets";
 
     public static void saveNetworkState(Context context,boolean isNetwork)
     {
