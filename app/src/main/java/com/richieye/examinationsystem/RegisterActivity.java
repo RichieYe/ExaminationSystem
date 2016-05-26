@@ -1,5 +1,10 @@
 package com.richieye.examinationsystem;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +22,7 @@ import android.widget.Toast;
 import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationOperator.UserOperator;
 import com.richieye.examinationsystemCustomControl.CustomRoundImageView;
+import com.richieye.examinationsystemNetwork.NetWorkOperator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,10 +96,9 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
            {
                return;
            }
-
-            List<Map<String,String>> list=new ArrayList<Map<String,String>>();
-            Map<String,String> map=new HashMap<String,String>();
-            map.put("UserName",etUserName.getText().toString().trim());
+            if (!checkNetWork()) {
+                handler.sendEmptyMessage(1);
+            }
         }
     };
 
@@ -102,6 +107,12 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
         public void onFocusChange(View v, boolean hasFocus) {
             if(!hasFocus)
             {
+                if(!checkNetWork())
+                {
+                    isExistsNO=true;
+                    return;
+                }
+
                 if(uOperator.checkStudentNo(etUserNo.getText().toString().trim()))
                 {
                     Log.e("RegisterActivity",uOperator.checkStudentNo(etUserNo.getText().toString().trim())+"");
@@ -145,10 +156,11 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
             iError++;
         }
 
-        if(etUserPassword.getText().toString().trim()!=etUserPasswordAgain.getText().toString().trim())
+        if(!etUserPassword.getText().toString().trim().equals(etUserPasswordAgain.getText().toString().trim()))
         {
             ivUserPasswordErr.setVisibility(View.VISIBLE);
             ivUserPasswordAgainErr.setVisibility(View.VISIBLE);
+            Log.e("RegisterActivity",etUserPassword.getText()+"        "+etUserPasswordAgain.getText());
             iError++;
         }
 
@@ -195,8 +207,7 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
             ivUserPasswordAgainErr.setVisibility(View.GONE);
         }
 
-        if((!etUserPassword.getText().toString().trim().equals(""))&&
-                etUserPassword.getText().toString().trim().equals(etUserPasswordAgain.getText().toString().trim()))
+        if(etUserPassword.getText().toString().trim().equals(etUserPasswordAgain.getText().toString().trim()))
         {
             ivUserPasswordErr.setVisibility(View.GONE);
             ivUserPasswordAgainErr.setVisibility(View.GONE);
@@ -204,6 +215,50 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
         {
             ivUserPasswordAgainErr.setVisibility(View.VISIBLE);
         }
+    }
 
+    public Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            //super.handleMessage(msg);
+            switch (msg.what)
+            {
+                case 1:
+                    RegisterUser();
+                    break;
+            }
+        }
+    };
+
+    private void RegisterUser()
+    {
+        Log.e("RegisterActivity","3333333333");
+        List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("UserName",etUserName.getText().toString().trim());
+        map.put("","");
+    }
+
+    private boolean checkNetWork()
+    {
+        if(!NetWorkOperator.isNetworkAvailable(RegisterActivity.this)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+            builder.setTitle("确认是否开启网络？");
+            builder.setMessage("网络不可用！注册用户需要开启网络，请问是否打开网络？");
+            builder.setIcon(R.mipmap.ic_error);
+            builder.setPositiveButton("开启", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent wifiSettingsIntent = new Intent("android.settings.WIFI_SETTINGS");
+                    startActivity(wifiSettingsIntent);
+                }
+            });
+            builder.setNegativeButton("取消",null);
+            builder.create().show();
+        }else
+        {
+            return true;
+        }
+        return false;
     }
 }
