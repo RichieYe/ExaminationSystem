@@ -22,6 +22,7 @@ public class StudentesForJson {
     final static String STUDENTS_WEB_SERVICE_NAME="User_Operator.asmx";
     public final static String STUDENT_OPERATOR_CHECKSTUDENTNO="CheckStudentNoForNo";
     public final static String STUDENT_OPERATOR_INSERT="Insert";
+    public final static String STUDENT_OPERATOR_LOGIN="Login";
 
     private Context context;
 
@@ -81,4 +82,13 @@ public class StudentesForJson {
         return strMsg;
     }
 
+    public String Login(Map<String, String> params)
+    {
+        return OperatorNetWork(STUDENT_OPERATOR_LOGIN,params);
+    }
+
+    public Map<String,String> getStudentForID(String ID)
+    {
+        return null;
+    }
 }

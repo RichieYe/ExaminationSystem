@@ -228,7 +228,6 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
         @Override
         public void handleMessage(Message msg) {
             //super.handleMessage(msg);
-            Log.e("RegisterActivity","55555555555");
             switch (msg.what)
             {
                 case 1:

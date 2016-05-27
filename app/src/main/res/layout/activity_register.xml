@@ -219,7 +219,8 @@
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:id="@+id/etRegUserPhone"
-            android:hint="请输入手机号码！"/>
+            android:hint="请输入手机号码！"
+            android:maxLength="12" />
 
     </LinearLayout>
 

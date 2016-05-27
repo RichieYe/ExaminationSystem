@@ -36,6 +36,12 @@ public class UserOperator {
         return  sJson.checkStudentNo(strNo);
     }
 
+    public boolean Login(Map<String,String> params)
+    {
+        String strMsg=sJson.Login(params);
+        return false;
+    }
+
     public boolean InsertStudent(Map<String,String> params)
     {
         String strMsg=sJson.InsertStudent(params);

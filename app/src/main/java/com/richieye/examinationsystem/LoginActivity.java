@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.richieye.examinationCommon.Common;
+import com.richieye.examinationOperator.UserOperator;
 import com.richieye.examinationsystemModel.TClasses;
 import com.richieye.examinationsystemNetwork.MyThread;
 import com.richieye.examinationOperator.ClassesOperator;
@@ -39,11 +40,14 @@ public class LoginActivity extends AppCompatActivity {
     ImageView ivShowHead;
     int iClassID=0;
     List<Map<String,String>> list;
-    //String strClassesJson;
+
+    UserOperator uOperator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        uOperator=new UserOperator(this);
         init();
     }
 
@@ -150,20 +154,37 @@ public class LoginActivity extends AppCompatActivity {
         {
             Toast.makeText(LoginActivity.this,"输入的学号、用户名或密码不能为空！",Toast.LENGTH_LONG).show();
             return;
+        }else
+        {
+            Login();
         }
+    }
+
+    private void Login()
+    {
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("No",etUserNo.getText().toString().trim());
+        map.put("UserName",etUserName.getText().toString().trim());
+        map.put("CId",iClassID+"");
+        map.put("Password",etUserPassword.getText().toString().trim());
+    }
+
+    private String getClassID()
+    {
+        LinearLayout layout=(LinearLayout) spClasses.getSelectedView();
+        TextView tvUserClassNo= (TextView) layout.findViewById(R.id.txtSpinnerItem_ID);
+        return tvUserClassNo.getText().toString();
     }
 
     public void txtRegisterClick(View view)
     {
         Intent intent=new Intent(this,RegisterActivity.class);
 
-        //intent.putExtra("Classes",strClassesJson);
         startActivityForResult(intent,0);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==0&&resultCode==0)
         {
             if(data!=null)
