@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,7 +33,8 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity implements TextWatcher {
 
-    EditText etUserNo,etUserName,etUserPassword,etUserPasswordAgain;
+    EditText etUserNo,etUserName,etUserPassword,etUserPasswordAgain,etUserIphone,etUserAddress;
+    RadioButton rbnGender;
     ImageView ivUserNoErr,ivUserNameErr,ivUserPasswordErr,ivUserPasswordAgainErr;
     CustomRoundImageView ivHead;
     TextView txtFilePath;
@@ -64,6 +67,9 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
         etUserPassword.addTextChangedListener(this);
         etUserPasswordAgain=(EditText)findViewById(R.id.etRegUserPasswordAgain);
         etUserPasswordAgain.addTextChangedListener(this);
+        etUserIphone= (EditText) findViewById(R.id.etRegUserPhone);
+        etUserAddress= (EditText) findViewById(R.id.etRegUserAddress);
+        rbnGender=(RadioButton)findViewById(R.id.rbRegMale);
         ivUserNoErr=(ImageView)findViewById(R.id.ivRegUserNoErr);
         ivUserNameErr=(ImageView)findViewById(R.id.ivRegUserNameErr);
         ivUserPasswordErr=(ImageView)findViewById(R.id.ivRegUserPassword);
@@ -92,11 +98,12 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
     private View.OnClickListener listener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            getClassID();
            if(CheckControl()||isExistsNO)
            {
                return;
            }
-            if (!checkNetWork()) {
+            if (checkNetWork()) {
                 handler.sendEmptyMessage(1);
             }
         }
@@ -221,6 +228,7 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
         @Override
         public void handleMessage(Message msg) {
             //super.handleMessage(msg);
+            Log.e("RegisterActivity","55555555555");
             switch (msg.what)
             {
                 case 1:
@@ -232,11 +240,53 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
 
     private void RegisterUser()
     {
-        Log.e("RegisterActivity","3333333333");
         List<Map<String,String>> list=new ArrayList<Map<String,String>>();
         Map<String,String> map=new HashMap<String,String>();
         map.put("UserName",etUserName.getText().toString().trim());
-        map.put("","");
+        map.put("No",etUserNo.getText().toString().trim());
+        map.put("CId",getClassID());
+        map.put("Password",etUserPassword.getText().toString().trim());
+        map.put("Gender",rbnGender.isChecked()?"男":"女");
+        map.put("Phone",etUserIphone.getText().toString().trim());
+        map.put("Address",etUserAddress.getText().toString().trim());
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("注册新用户");
+
+        if(uOperator.InsertStudent(map))
+        {
+
+
+            builder.setIcon(R.mipmap.ic_ok);
+            builder.setMessage("注册用户成功，点击<确定>按钮后直接登录！");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent=new Intent();
+                    intent.putExtra("Position",spClass.getSelectedItemPosition());
+                    intent.putExtra("UserNo", etUserNo.getText().toString());
+                    intent.putExtra("UserName",etUserName.getText().toString());
+                    intent.putExtra("UserPassword",etUserPassword.getText().toString());
+                    intent.putExtra("UserHead","");
+                    RegisterActivity.this.setResult(0,intent);
+                    RegisterActivity.this.finish();
+                }
+            });
+            builder.create().show();
+        }else
+        {
+            builder.setIcon(R.mipmap.ic_error);
+            builder.setMessage("注册用户失败！请稍候再次尝试或与管理员联系！");
+            builder.setPositiveButton("确定",null);
+            builder.create().show();
+        }
+    }
+
+    private String getClassID()
+    {
+        LinearLayout layout=(LinearLayout) spClass.getSelectedView();
+        TextView tvUserClassNo= (TextView) layout.findViewById(R.id.txtSpinnerItem_ID);
+        return tvUserClassNo.getText().toString();
     }
 
     private boolean checkNetWork()

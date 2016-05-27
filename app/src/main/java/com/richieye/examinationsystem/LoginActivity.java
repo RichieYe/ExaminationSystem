@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     ImageView ivShowHead;
     int iClassID=0;
     List<Map<String,String>> list;
-    String strClassesJson;
+    //String strClassesJson;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         Intent intent=new Intent(this,RegisterActivity.class);
 
-        intent.putExtra("Classes",strClassesJson);
+        //intent.putExtra("Classes",strClassesJson);
         startActivityForResult(intent,0);
     }
 
@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                 etUserName.setText(data.getStringExtra("UserName"));
                 etUserPassword.setText(data.getStringExtra("UserPassword"));
                 String strFile=data.getStringExtra("UserHead");
-                btnLogin.performClick();
+                //btnLogin.performClick();
             }
         }
     }

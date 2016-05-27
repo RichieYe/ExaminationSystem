@@ -21,6 +21,7 @@ import java.util.concurrent.Future;
 public class StudentesForJson {
     final static String STUDENTS_WEB_SERVICE_NAME="User_Operator.asmx";
     public final static String STUDENT_OPERATOR_CHECKSTUDENTNO="CheckStudentNoForNo";
+    public final static String STUDENT_OPERATOR_INSERT="Insert";
 
     private Context context;
 
@@ -57,6 +58,27 @@ public class StudentesForJson {
             isExists=true;
         }
         return isExists;
+    }
+
+    public String InsertStudent(Map<String,String> params)
+    {
+        return OperatorNetWork(STUDENT_OPERATOR_INSERT,params);
+    }
+
+    public String OperatorNetWork(String strMethod,Map<String,String> params)
+    {
+        String strMsg="";
+
+        ExecutorService exs= Executors.newCachedThreadPool();
+        Future<String> future=exs.submit(new MyThread(STUDENTS_WEB_SERVICE_NAME,strMethod,params));
+        try {
+            strMsg = future.get();
+        }catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return "Error";
+        }
+        return strMsg;
     }
 
 }
