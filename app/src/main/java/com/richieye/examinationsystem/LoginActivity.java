@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.richieye.examinationCommon.Common;
 import com.richieye.examinationOperator.UserOperator;
+import com.richieye.examinationSystemIO.PreferencesOperator;
 import com.richieye.examinationsystemModel.TClasses;
 import com.richieye.examinationsystemModel.TStudents;
 import com.richieye.examinationsystemNetwork.MyThread;
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     ImageView ivShowUserNameErr,ivShowUserNoErr,ivShowUserPasswordErr;
     ImageView ivShowHead;
+    CheckBox cbxRemember;
     int iClassID=0;
     List<Map<String,String>> list;
 
@@ -71,9 +74,11 @@ public class LoginActivity extends AppCompatActivity {
         etUserNo.addTextChangedListener(watcher);
         etUserName.addTextChangedListener(watcher);
         etUserPassword.addTextChangedListener(watcher);
+        cbxRemember= (CheckBox) findViewById(R.id.cbxRemember);
         init_Spinner();
 
         spClasses.setOnItemSelectedListener(spinner_listener);
+        LoadUserInfo();
     }
 
     private AdapterView.OnItemSelectedListener spinner_listener=new AdapterView.OnItemSelectedListener() {
@@ -184,11 +189,12 @@ public class LoginActivity extends AppCompatActivity {
         map.put("UserName",etUserName.getText().toString().trim());
         map.put("CId",iClassID+"");
         map.put("Password",etUserPassword.getText().toString().trim());
-        Log.e("LoginActivity","11111111");
+
         tStudents=uOperator.Login(map);
         if(tStudents!=null)
         {
             Intent intent=new Intent(this,MainActivity.class);
+            SavaSharedPreferences();
             intent.putExtra("Student",tStudents);
             startActivity(intent);
             finish();
@@ -228,7 +234,7 @@ public class LoginActivity extends AppCompatActivity {
                 etUserName.setText(data.getStringExtra("UserName"));
                 etUserPassword.setText(data.getStringExtra("UserPassword"));
                 String strFile=data.getStringExtra("UserHead");
-                //btnLogin.performClick();
+                btnLogin.performClick();
             }
         }
     }
@@ -237,4 +243,38 @@ public class LoginActivity extends AppCompatActivity {
     {
 
     };
+
+    private void LoadUserInfo()
+    {
+        Map<String,String> map= PreferencesOperator.loadUserInfo(this);
+        boolean isSave=Boolean.parseBoolean(map.get("isSave"));
+        if(isSave)
+        {
+            cbxRemember.setChecked(true);
+            //int iChoose=Integer.parseInt(map.get("CID"));
+            spClasses.setSelection(Integer.parseInt(map.get("CID")));
+            etUserNo.setText(map.get("UserNo"));
+            etUserName.setText(map.get("UserName"));
+            etUserPassword.setText(map.get("Password"));
+        }else
+        {
+            cbxRemember.setChecked(false);
+        }
+    }
+
+    protected void SavaSharedPreferences()
+    {
+        String strUserNo="",strUserName="",strPassword="";
+        int iCID=1;
+        boolean isSave=cbxRemember.isChecked();
+        if(isSave)
+        {
+            iCID=spClasses.getSelectedItemPosition();
+            strUserNo=etUserNo.getText().toString().trim();
+            strUserName=etUserName.getText().toString().trim();
+            strPassword=etUserPassword.getText().toString().trim();
+        }
+
+        PreferencesOperator.savaUserInfo(this,iCID,strUserNo,strUserName,strPassword,isSave);
+    }
 }

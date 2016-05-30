@@ -41,18 +41,12 @@ public class UserOperator {
     public TStudents getStudentForID(Map<String,String> params)
     {
         String strMsg=sJson.getStudentForID(params);
-        Log.e("UserOperator",strMsg);
-        TStudents tStudents=null;
-        try{
 
-        }catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        String CREATE_STUDENT_TABLE="Create Table IF NOT EXISTS tb_Students(" +
-                "_id Integer Primary Key,No text,UserName text,CID Integer references tb_Classes(_id)," +
-                "password text,gender text,phone text,address text,localpath text,servicepath text);";
-        return tStudents;
+        Map<String,String> map=getStudentForJSON(strMsg);
+
+        InsertStudentToDB(map);
+
+        return getStudentForMap(map);
     }
 
     public TStudents Login(Map<String,String> params)
@@ -119,11 +113,49 @@ public class UserOperator {
 
     public TStudents getStudentForMap(Map<String,String>params)
     {
-        return null;
+        Log.e("UserOperator","1111111");
+        TStudents tStudents=null;
+        if(params!=null)
+        {
+            tStudents=new TStudents();
+            tStudents.setID(Integer.parseInt(params.get("_id")));
+            tStudents.setNo(params.get("No"));
+            tStudents.setUserName(params.get("UserName"));
+            tStudents.setCID(Integer.parseInt(params.get("CID")));
+            tStudents.setPassword(params.get("password"));
+            tStudents.setGender(params.get("gender"));
+            tStudents.setPhone(params.get("phone"));
+            tStudents.setAddress(params.get("address"));
+            tStudents.setLocalPath(params.get("localpath"));
+            tStudents.setServicePath(params.get("servicepath"));
+        }
+
+        return tStudents;
     }
 
     public Map<String,String> getStudentForJSON(String strJson)
     {
-        return null;
+        Map<String,String> map=null;
+        try
+        {
+            JSONArray jsonArray=new JSONArray(strJson);
+            JSONObject jsonObject=jsonArray.getJSONObject(0);
+            map=new HashMap<String, String>();
+            map.put("_id",jsonObject.getString("ID"));
+            map.put("No",jsonObject.getString("NO"));
+            map.put("UserName",jsonObject.getString("UserName"));
+            map.put("CID",jsonObject.getString("CID"));
+            map.put("password",jsonObject.getString("Password"));
+            map.put("gender",jsonObject.getString("Gender"));
+            map.put("phone",jsonObject.getString("Phone"));
+            map.put("address",jsonObject.getString("Address"));
+            map.put("localpath","");
+            map.put("servicepath","");
+        }catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return map;
     }
 }
