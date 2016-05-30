@@ -1,6 +1,7 @@
 package com.richieye.examinationOperator;
 
 import android.content.Context;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import com.richieye.examinationsystemDao.StudentsHelper;
@@ -47,6 +48,31 @@ public class UserOperator {
         InsertStudentToDB(map);
 
         return getStudentForMap(map);
+    }
+
+    public TStudents Login(Map<String,String> params,boolean isNetWork)
+    {
+        if(isNetWork)
+        {
+            return Login(params);
+        }else
+        {
+            List<Map<String,String>> list=new ArrayList<>();
+            Map<String,String>map=new HashMap<String, String>();
+            map.put("CID",params.get("CId"));
+            list.add(map);
+            map=new HashMap<String, String>();
+            map.put("UserNo",params.get("No"));
+            list.add(map);
+            map=new HashMap<String,String>();
+            map.put("UserName",params.get("UserName"));
+            list.add(map);
+            map=new HashMap<String,String>();
+            map.put("Password",params.get("Password"));
+            list.add(map);
+            Log.e("UserOperator",list.toString());
+            return  helper.Login(list);
+        }
     }
 
     public TStudents Login(Map<String,String> params)

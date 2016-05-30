@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     ImageView ivShowHead;
     CheckBox cbxRemember;
     int iClassID=0;
+    RadioButton rbNetWork;
     List<Map<String,String>> list;
 
     UserOperator uOperator;
@@ -75,8 +77,9 @@ public class LoginActivity extends AppCompatActivity {
         etUserName.addTextChangedListener(watcher);
         etUserPassword.addTextChangedListener(watcher);
         cbxRemember= (CheckBox) findViewById(R.id.cbxRemember);
+        rbNetWork= (RadioButton) findViewById(R.id.rbNetwork);
         init_Spinner();
-
+        Log.e("LoginActivity","1111111111111111111");
         spClasses.setOnItemSelectedListener(spinner_listener);
         LoadUserInfo();
     }
@@ -190,7 +193,8 @@ public class LoginActivity extends AppCompatActivity {
         map.put("CId",iClassID+"");
         map.put("Password",etUserPassword.getText().toString().trim());
 
-        tStudents=uOperator.Login(map);
+        Log.e("LoginActivity",map.toString());
+        tStudents=uOperator.Login(map,rbNetWork.isChecked()?true:false);
         if(tStudents!=null)
         {
             Intent intent=new Intent(this,MainActivity.class);

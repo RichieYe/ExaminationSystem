@@ -3,6 +3,8 @@ package com.richieye.examinationsystemDao;
 import android.content.Context;
 import android.util.Log;
 
+import com.richieye.examinationsystemModel.TStudents;
+
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +28,16 @@ public class StudentsHelper
     public void InsertStudent(List<Map<String,String>> list)
     {
         helper.Replace("tb_Students",list);
-        Log.e("StudentsHelper","11111111111");
+    }
+
+    public Map<String,String> getStudentForID(String ID)
+    {
+        return null;
+    }
+
+    public TStudents Login(List<Map<String,String>> params)
+    {
+        helper.Select("tb_Students",params);
+        return null;
     }
 }

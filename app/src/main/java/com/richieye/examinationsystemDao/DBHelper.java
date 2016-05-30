@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -74,16 +75,14 @@ public class DBHelper extends SQLiteOpenHelper
         if(params!=null&&!params.isEmpty())
         {
             contentValues=new ContentValues();
-            for(Map<String,String> map:params)
-            {
-                Iterator iterator=map.entrySet().iterator();
-                while (iterator.hasNext())
-                {
-                    Map.Entry entry=(Map.Entry)iterator.next();
+            for(Map<String,String> map:params) {
+                Iterator iterator = map.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry entry = (Map.Entry) iterator.next();
                     contentValues.put((String) entry.getKey(),
                             (String) entry.getValue());
                 }
-                this.getWritableDatabase().replace(TBName,"_id",contentValues);
+                this.getWritableDatabase().replace(TBName, "_id", contentValues);
             }
         }
     }
@@ -102,8 +101,59 @@ public class DBHelper extends SQLiteOpenHelper
         return this.getReadableDatabase().query(tbName,null,strWhere,strArgs,null,null,null);
     }
 
-    public Cursor Select(String strSql,List<Map<String,String>> params)
+    public Cursor Select(String tbName,List<Map<String,String>> params)
     {
+        String strWhere=makeWhere(params);
+        Log.e("DBHelper",strWhere);
         return null;
+    }
+
+    public String makeWhere(List<Map<String,String>> params)
+    {
+        String strWhere="";
+        String[] strArgs=makePremeters(params);
+        for(int i=0;i<strArgs.length;i++)
+        {
+            Log.e("DBHelper3",strArgs[i]);
+        }
+        if(params!=null&&!params.isEmpty())
+        {
+            for(Map<String,String> map:params)
+            {
+                Iterator iterator=map.entrySet().iterator();
+                while (iterator.hasNext())
+                {
+                    Map.Entry entry=(Map.Entry)iterator.next();
+                    strWhere+= entry.getKey() +"=? and ";
+                    Log.e("DBHelper",strWhere);
+                }
+            }
+
+            strWhere=strWhere.substring(0,strWhere.lastIndexOf(" and "));
+        }
+        return  strWhere;
+    }
+
+    private String[] makePremeters(List<Map<String,String>> params)
+    {
+        //String[] strArgs;
+        List<String> list=new ArrayList<String>();
+        if(params!=null&&!params.isEmpty())
+        {
+            Log.e("DBHelper5",params.toString());
+            for(Map<String,String> map:params)
+            {
+                Iterator iterator=map.entrySet().iterator();
+                while (iterator.hasNext())
+                {
+                    Map.Entry entry=(Map.Entry)iterator.next();
+                   list.add((String) entry.getValue());
+                }
+                Log.e("DBHelper2",list.toString());
+            }
+        }
+        //Object[] objects=list.toArray();
+
+        return new String[]{list.toString()};
     }
 }
