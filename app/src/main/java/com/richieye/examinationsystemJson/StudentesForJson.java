@@ -23,6 +23,7 @@ public class StudentesForJson {
     public final static String STUDENT_OPERATOR_CHECKSTUDENTNO="CheckStudentNoForNo";
     public final static String STUDENT_OPERATOR_INSERT="Insert";
     public final static String STUDENT_OPERATOR_LOGIN="Login";
+    public final static String STUDENT_OPWEATOR_GETSTUDENTFORID="GetStudentForID";
 
     private Context context;
 
@@ -87,8 +88,8 @@ public class StudentesForJson {
         return OperatorNetWork(STUDENT_OPERATOR_LOGIN,params);
     }
 
-    public Map<String,String> getStudentForID(String ID)
+    public String getStudentForID(Map<String,String> params)
     {
-        return null;
+        return OperatorNetWork(STUDENT_OPWEATOR_GETSTUDENTFORID,params);
     }
 }

@@ -2,6 +2,7 @@ package com.richieye.examinationsystem;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.richieye.examinationCommon.Common;
 import com.richieye.examinationOperator.UserOperator;
 import com.richieye.examinationsystemModel.TClasses;
+import com.richieye.examinationsystemModel.TStudents;
 import com.richieye.examinationsystemNetwork.MyThread;
 import com.richieye.examinationOperator.ClassesOperator;
 
@@ -43,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
     UserOperator uOperator;
 
+    TStudents tStudents;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +68,8 @@ public class LoginActivity extends AppCompatActivity {
         spClasses= (Spinner) findViewById(R.id.spClassName);
         etUserNo.setFocusable(true);
         btnLogin.setOnClickListener(listener);
+        etUserNo.addTextChangedListener(watcher);
+        etUserName.addTextChangedListener(watcher);
         etUserPassword.addTextChangedListener(watcher);
         init_Spinner();
 
@@ -74,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             LinearLayout layout=(LinearLayout)view;
-            iClassID=Integer.parseInt(((TextView)view.findViewById(R.id.txtSpinnerItem_ID)).getText().toString());
+            iClassID=Integer.parseInt(((TextView)layout.findViewById(R.id.txtSpinnerItem_ID)).getText().toString());
         }
 
         @Override
@@ -109,7 +115,18 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if(!(s.toString().trim().length()==0)) {
+            if(!etUserNo.getText().toString().trim().equals(""))
+            {
+                ivShowUserNoErr.setVisibility(View.GONE);
+            }
+
+            if(!etUserName.getText().toString().trim().equals(""))
+            {
+                ivShowUserNameErr.setVisibility(View.GONE);
+            }
+
+            if(!etUserPassword.getText().toString().trim().equals(""))
+            {
                 ivShowUserPasswordErr.setVisibility(View.GONE);
             }
         }
@@ -167,6 +184,23 @@ public class LoginActivity extends AppCompatActivity {
         map.put("UserName",etUserName.getText().toString().trim());
         map.put("CId",iClassID+"");
         map.put("Password",etUserPassword.getText().toString().trim());
+        Log.e("LoginActivity","11111111");
+        tStudents=uOperator.Login(map);
+        if(tStudents!=null)
+        {
+            Intent intent=new Intent(this,MainActivity.class);
+            intent.putExtra("Student",tStudents);
+            startActivity(intent);
+            finish();
+        }else
+        {
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("输入的信息有误！");
+            builder.setIcon(R.mipmap.ic_error);
+            builder.setMessage("输入的用户名或密码有误，请重新输入或与管理员联系！");
+            builder.setPositiveButton("确定",null);
+            builder.create().show();
+        }
     }
 
     private String getClassID()
