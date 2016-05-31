@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * Created by RichieYe on 2016/4/12.
@@ -128,7 +129,6 @@ public class DBHelper extends SQLiteOpenHelper
                     Log.e("DBHelper",strWhere);
                 }
             }
-
             strWhere=strWhere.substring(0,strWhere.lastIndexOf(" and "));
         }
         return  strWhere;
@@ -136,24 +136,34 @@ public class DBHelper extends SQLiteOpenHelper
 
     private String[] makePremeters(List<Map<String,String>> params)
     {
-        //String[] strArgs;
-        List<String> list=new ArrayList<String>();
+        String[] strArgs=new String[params.size()];
+        //List<String> list=new ArrayList<String>();
         if(params!=null&&!params.isEmpty())
         {
             Log.e("DBHelper5",params.toString());
+            int i=0;
             for(Map<String,String> map:params)
             {
+
                 Iterator iterator=map.entrySet().iterator();
                 while (iterator.hasNext())
                 {
                     Map.Entry entry=(Map.Entry)iterator.next();
-                   list.add((String) entry.getValue());
+                    strArgs[i]=(String)entry.getValue();
+                    //list.add((String) entry.getValue());
                 }
-                Log.e("DBHelper2",list.toString());
+                //Log.e("DBHelper2",list.toString());
+                i++;
             }
         }
         //Object[] objects=list.toArray();
+        //String strArgs[]=(String[])list.toArray();
 
-        return new String[]{list.toString()};
+        for(int i=0;i<strArgs.length;i++)
+        {
+            Log.e("DBHelper",strArgs[i]);
+        }
+
+        return strArgs;
     }
 }
