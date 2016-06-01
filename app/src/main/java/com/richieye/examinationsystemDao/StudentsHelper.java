@@ -1,6 +1,7 @@
 package com.richieye.examinationsystemDao;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.richieye.examinationsystemModel.TStudents;
@@ -37,7 +38,7 @@ public class StudentsHelper
 
     public TStudents Login(List<Map<String,String>> params)
     {
-        helper.Select("tb_Students",params);
+        Cursor myCursor=helper.Select("tb_Students",params);
         return null;
     }
 }

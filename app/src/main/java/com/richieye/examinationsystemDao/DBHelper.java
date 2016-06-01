@@ -105,18 +105,15 @@ public class DBHelper extends SQLiteOpenHelper
     public Cursor Select(String tbName,List<Map<String,String>> params)
     {
         String strWhere=makeWhere(params);
-        Log.e("DBHelper",strWhere);
-        return null;
+        String[] strArgs=makePremeters(params);
+
+        return this.getReadableDatabase().query(tbName,null,strWhere,strArgs,null,null,null);
     }
 
     public String makeWhere(List<Map<String,String>> params)
     {
         String strWhere="";
-        String[] strArgs=makePremeters(params);
-        for(int i=0;i<strArgs.length;i++)
-        {
-            Log.e("DBHelper3",strArgs[i]);
-        }
+
         if(params!=null&&!params.isEmpty())
         {
             for(Map<String,String> map:params)
@@ -126,7 +123,6 @@ public class DBHelper extends SQLiteOpenHelper
                 {
                     Map.Entry entry=(Map.Entry)iterator.next();
                     strWhere+= entry.getKey() +"=? and ";
-                    Log.e("DBHelper",strWhere);
                 }
             }
             strWhere=strWhere.substring(0,strWhere.lastIndexOf(" and "));
@@ -137,10 +133,8 @@ public class DBHelper extends SQLiteOpenHelper
     private String[] makePremeters(List<Map<String,String>> params)
     {
         String[] strArgs=new String[params.size()];
-        //List<String> list=new ArrayList<String>();
         if(params!=null&&!params.isEmpty())
         {
-            Log.e("DBHelper5",params.toString());
             int i=0;
             for(Map<String,String> map:params)
             {
@@ -150,18 +144,10 @@ public class DBHelper extends SQLiteOpenHelper
                 {
                     Map.Entry entry=(Map.Entry)iterator.next();
                     strArgs[i]=(String)entry.getValue();
-                    //list.add((String) entry.getValue());
                 }
-                //Log.e("DBHelper2",list.toString());
+
                 i++;
             }
-        }
-        //Object[] objects=list.toArray();
-        //String strArgs[]=(String[])list.toArray();
-
-        for(int i=0;i<strArgs.length;i++)
-        {
-            Log.e("DBHelper",strArgs[i]);
         }
 
         return strArgs;
