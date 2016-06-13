@@ -10,127 +10,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="学生信息"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal" />
 
-    <com.richieye.examinationsystemCustomControl.CustomRoundImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/ivMainHead"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:src="@mipmap/default_head"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <com.richieye.examinationsystemCustomControl.CustomRoundImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="0dp"
-            android:text="班级："/>
+            android:layout_marginRight="10dp"
+            android:id="@+id/ivMainHead"
+            android:layout_gravity="center"
+            android:src="@mipmap/default_head"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <TableLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvMainClass"
-            android:layout_weight="1"
-            android:layout_marginLeft="0dp"
-            android:layout_gravity="fill_horizontal"
-            android:text="Android班"/>
+            android:layout_weight="1">
+            <TableRow>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="学号："/>
+            </TableRow>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvMainNo"
-            android:layout_weight="1"
-            android:text="000000000001"/>
+        </TableLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="姓名："/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvMainName"
-            android:layout_columnWeight="3"
-            android:text="Test帐号"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="性别："/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvMainGender"
-            android:layout_columnWeight="3"
-            android:text="男"/>
-
-
-    </LinearLayout>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="4"
-        android:rowCount="4"
-        >
-
-
-
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_row="2"
-            android:text="手机号码："/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvMainPhone"
-            android:layout_columnWeight="3"
-            android:text="Android班"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_row="3"
-            android:text="地址："/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvMainAddress"
-            android:layout_columnWeight="3"
-            android:layout_row="3"
-            android:text="Android班"/>
-
-    </GridLayout>
 
 </LinearLayout>
