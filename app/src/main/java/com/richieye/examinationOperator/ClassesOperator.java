@@ -29,8 +29,13 @@ public class ClassesOperator {
         helper.InsertForService(list);
     }
 
+    public String getClassNameByID(int CID)
+    {
+        return helper.getClassNameForID(CID);
+    }
+
     public List<Map<String,String>> getClasses()
     {
-        return helper.getClasses();
+        return helper.getClasses(0);
     }
 }

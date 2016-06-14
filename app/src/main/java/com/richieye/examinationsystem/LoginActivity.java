@@ -79,7 +79,6 @@ public class LoginActivity extends AppCompatActivity {
         cbxRemember= (CheckBox) findViewById(R.id.cbxRemember);
         rbNetWork= (RadioButton) findViewById(R.id.rbNetwork);
         init_Spinner();
-        Log.e("LoginActivity","1111111111111111111");
         spClasses.setOnItemSelectedListener(spinner_listener);
         LoadUserInfo();
     }
@@ -193,8 +192,8 @@ public class LoginActivity extends AppCompatActivity {
         map.put("CId",iClassID+"");
         map.put("Password",etUserPassword.getText().toString().trim());
 
-        Log.e("LoginActivity",map.toString());
         tStudents=uOperator.Login(map,rbNetWork.isChecked()?true:false);
+
         if(tStudents!=null)
         {
             Intent intent=new Intent(this,MainActivity.class);

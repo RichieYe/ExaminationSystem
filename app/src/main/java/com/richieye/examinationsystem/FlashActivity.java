@@ -93,8 +93,8 @@ public class FlashActivity extends AppCompatActivity {
                     }else
                     {
                         //测试使用，暂时屏蔽
-                        //intent.setClass(FlashActivity.this,LoginActivity.class);
-                        intent.setClass(FlashActivity.this,MainActivity.class);
+                        intent.setClass(FlashActivity.this,LoginActivity.class);
+                        //intent.setClass(FlashActivity.this,MainActivity.class);
                     }
                     break;
             }

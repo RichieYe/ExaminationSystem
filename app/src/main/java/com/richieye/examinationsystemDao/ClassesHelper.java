@@ -31,11 +31,11 @@ public class ClassesHelper {
         helper.Replace("tb_Classes",list);
     }
 
-    public List<Map<String,String>> getClasses()
+    public List<Map<String,String>> getClasses(int CID)
     {
         List<Map<String,String>>list=new ArrayList<Map<String,String>>();
 
-        Cursor myCursor=helper.Select("tb_Classes",0);
+        Cursor myCursor=helper.Select("tb_Classes",CID);
 
         if(myCursor!=null&&myCursor.getCount()>0)
         {
@@ -52,6 +52,13 @@ public class ClassesHelper {
             }
         }
         return list;
+    }
+
+    public String getClassNameForID(int CID)
+    {
+        List<Map<String,String>> list=getClasses(CID);
+        Log.e("ClassesHelper",list.get(0).get("ClassName")+"    "+CID);
+        return list.get(0).get("ClassName");
     }
 
 }

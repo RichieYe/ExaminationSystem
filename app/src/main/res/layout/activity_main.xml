@@ -23,10 +23,8 @@
         <com.richieye.examinationsystemCustomControl.CustomRoundImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/ivMainHead"
-            android:layout_gravity="center"
             android:src="@mipmap/default_head"/>
 
         <TableLayout
@@ -133,7 +131,9 @@
                     android:layout_column="1"
                     android:layout_weight="1"
                     android:text="Android班"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp"
+                    android:maxEms="12"
+                    android:maxLength="12" />
             </TableRow>
 
             <TableRow
@@ -153,7 +153,8 @@
                     android:id="@+id/tvMainAddress"
                     android:layout_weight="1"
                     android:textSize="17dp"
-                    android:text="Android班"/>
+                    android:text="Android班"
+                    android:ellipsize="middle" />
             </TableRow>
 
             <TableRow
@@ -167,8 +168,9 @@
                     android:layout_weight="1"
                     android:layout_column="1"
                     android:layout_gravity="right"
-                    android:layout_marginTop="5dp"
-                    android:text="信息管理>"/>
+                    android:layout_marginTop="10dp"
+                    android:text="信息管理>"
+                    android:gravity="bottom|right" />
             </TableRow>
         </TableLayout>
 
@@ -198,6 +200,7 @@
             android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>
+
         <LinearLayout
             android:layout_width="3dp"
             android:layout_height="match_parent"
@@ -209,7 +212,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rcMainItemList"
+            android:id="@+id/rvMainItemList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
