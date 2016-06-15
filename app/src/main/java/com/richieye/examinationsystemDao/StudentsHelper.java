@@ -29,6 +29,7 @@ public class StudentsHelper
     public void InsertStudent(List<Map<String,String>> list)
     {
         helper.Replace("tb_Students",list);
+        Log.e("StudentsHelper",list.toString());
     }
 
     public Map<String,String> getStudentForID(String ID)

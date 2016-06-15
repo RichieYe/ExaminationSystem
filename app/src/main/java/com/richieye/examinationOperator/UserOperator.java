@@ -133,6 +133,7 @@ public class UserOperator {
                 List<Map<String,String>> list=new ArrayList<Map<String, String>>();
                 list.add(params);
                 helper.InsertStudent(list);
+                Log.e("UserOperator","11111111");
             }
         }).start();
     }
