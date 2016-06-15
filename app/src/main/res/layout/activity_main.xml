@@ -17,7 +17,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <com.richieye.examinationsystemCustomControl.CustomRoundImageView
@@ -178,12 +180,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0.7dp"
+        android:layout_height="2dp"
         android:background="#000">
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="20dp"
@@ -191,34 +193,57 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvMainHeadList"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-
-        <LinearLayout
-            android:layout_width="3dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:orientation="horizontal"
-            android:background="#D3D3D3">
-
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvMainItemList"
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#ffbef0ff">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        </android.support.v7.widget.RecyclerView>
+            <RadioButton
+                android:id="@+id/rbMainShowAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="全部信息"/>
+
+            <RadioButton
+                android:id="@+id/rbMainUnFinish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="未考"/>
+
+            <RadioButton
+                android:id="@+id/rbMainExamin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="正在考试"/>
+
+            <RadioButton
+                android:id="@+id/rbMainFinished"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="已考"/>
+
+        </RadioGroup>
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#D3D3D3">
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvMainShow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
 
 </LinearLayout>

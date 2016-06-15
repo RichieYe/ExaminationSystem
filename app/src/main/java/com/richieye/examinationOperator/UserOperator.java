@@ -62,7 +62,7 @@ public class UserOperator {
             map.put("CID",params.get("CId"));
             list.add(map);
             map=new HashMap<String, String>();
-            map.put("UserNo",params.get("No"));
+            map.put("No",params.get("No"));
             list.add(map);
             map=new HashMap<String,String>();
             map.put("UserName",params.get("UserName"));
