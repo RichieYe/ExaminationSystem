@@ -5,24 +5,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.richieye.examinationAdapter.MyItemDecoration;
 import com.richieye.examinationAdapter.RecyclerViewHeadAdapter;
 import com.richieye.examinationOperator.ClassesOperator;
+import com.richieye.examinationOperator.TestingOperator;
 import com.richieye.examinationOperator.UserOperator;
 import com.richieye.examinationsystemCustomControl.CustomRoundImageView;
 import com.richieye.examinationsystemModel.TStudents;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvClassName, tvNo, tvName, tvGender, tvPhone, tvAddress, tvManager;
     CustomRoundImageView myHeadImage;
     RecyclerView rvHead, rvItem;
+    ListView lvTestingShow;
 
     LinearLayoutManager mHeadLayoutManager,mItemLayoutManager;
 
@@ -30,18 +36,20 @@ public class MainActivity extends AppCompatActivity {
 
     ClassesOperator cOperator;
     UserOperator uOperator;
+    TestingOperator tOperator;
 
-    List<String> lstHead;
+    List<Map<String,String>> lstShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.testing_main_item);
+        setContentView(R.layout.activity_main);
 
         cOperator=new ClassesOperator(this);
         uOperator=new UserOperator(this);
+        tOperator=new TestingOperator(this);
 
-        /*
+
         initViews();
         Intent intent=getIntent();
         if(intent!=null) {
@@ -50,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 initDatas();
             }
         }
-        */
+
     }
 
     private void initViews() {
@@ -68,14 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         myHeadImage=(CustomRoundImageView)findViewById(R.id.ivMainHead);
-        //rvHead=(RecyclerView)findViewById(R.id.rvMainHeadList);
-        //mHeadLayoutManager=new LinearLayoutManager(this);
-        //rvHead.setLayoutManager(mHeadLayoutManager);
-        //rvHead.addItemDecoration(new MyItemDecoration());
-        //rvHead.addItemDecoration();
-        //rvItem=(RecyclerView)findViewById(R.id.rvMainItemList);
-        //mItemLayoutManager=new LinearLayoutManager(this);
-        //rvItem.setLayoutManager(mItemLayoutManager);
+        lvTestingShow= (ListView) findViewById(R.id.lvMainShow);
     }
 
     private void initDatas() {
@@ -85,11 +86,13 @@ public class MainActivity extends AppCompatActivity {
         tvGender.setText(tStudent.getGender());
         tvPhone.setText(tStudent.getPhone());
         tvAddress.setText(tStudent.getAddress());
-        lstHead=new ArrayList<String>();
-        lstHead.add("还没考试...");
-        lstHead.add("正在考试...");
-        lstHead.add("已经考完!!!");
-        //RecyclerViewHeadAdapter headAdapter=new RecyclerViewHeadAdapter(this,lstHead);
-        //rvHead.setAdapter(headAdapter);
+        lstShow=tOperator.getTestingByUID(tStudent.getID());
+        if(lstShow!=null) {
+            SimpleAdapter myAdapter=new SimpleAdapter(this,lstShow,R.layout.testing_main_item,
+                    new String[]{"_id","TestDate","Flag","StartTime","EndTime"},
+                    new int[]{R.id.tvTestingMainItem_ID,R.id.tvTestingMainItem_Date,
+                            R.id.tvTestingMainItem_Flag,R.id.tvTestingMainItem_StartTime,R.id.tvTestingMainItem_EndTime});
+            lvTestingShow.setAdapter(myAdapter);
+        }
     }
 }

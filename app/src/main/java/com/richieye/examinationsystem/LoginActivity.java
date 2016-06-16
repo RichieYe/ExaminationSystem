@@ -12,10 +12,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -45,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     ImageView ivShowHead;
     CheckBox cbxRemember;
     int iClassID=0;
-    RadioButton rbNetWork;
+    RadioButton rbNetWork,rbLocal;
     List<Map<String,String>> list;
 
     UserOperator uOperator;
@@ -78,10 +80,20 @@ public class LoginActivity extends AppCompatActivity {
         etUserPassword.addTextChangedListener(watcher);
         cbxRemember= (CheckBox) findViewById(R.id.cbxRemember);
         rbNetWork= (RadioButton) findViewById(R.id.rbNetwork);
+        rbNetWork.setOnCheckedChangeListener(rbNetWork_OnCheckedChangeListener);
+        rbLocal=(RadioButton)findViewById(R.id.rbLocal);
+        rbLocal.setOnCheckedChangeListener(rbNetWork_OnCheckedChangeListener);
         init_Spinner();
         spClasses.setOnItemSelectedListener(spinner_listener);
         LoadUserInfo();
     }
+
+    private CompoundButton.OnCheckedChangeListener rbNetWork_OnCheckedChangeListener=new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            PreferencesOperator.saveNetworkState(LoginActivity.this,rbNetWork.isChecked());
+        }
+    };
 
     private AdapterView.OnItemSelectedListener spinner_listener=new AdapterView.OnItemSelectedListener() {
         @Override

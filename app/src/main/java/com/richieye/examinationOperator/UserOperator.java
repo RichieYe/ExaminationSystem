@@ -70,7 +70,6 @@ public class UserOperator {
             map=new HashMap<String,String>();
             map.put("Password",params.get("Password"));
             list.add(map);
-            Log.e("UserOperator",list.toString());
             return  helper.Login(list);
         }
     }
@@ -79,7 +78,6 @@ public class UserOperator {
     {
         String strMsg=sJson.Login(params);
         TStudents tStudents=null;
-        Log.e("UserOperator",strMsg);
         try {
             JSONArray jsonArray = new JSONArray(strMsg);
             JSONObject jsonObject=jsonArray.getJSONObject(0);

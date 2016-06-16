@@ -46,6 +46,7 @@ public class ClassesForJson
 
     public String GetJSonString(String strMethodName,Map<String,String> params)
     {
+        /*
         String strJSon="";
         ExecutorService exs= Executors.newCachedThreadPool();
         Future<String> future=exs.submit(new MyThread(CLASSES_WEB_SERVICE_NAME,strMethodName,params));
@@ -57,6 +58,9 @@ public class ClassesForJson
             e.printStackTrace();
         }
        return strJSon;
+       */
+
+        return JSonOperator.getJSonStringForNetWork(CLASSES_WEB_SERVICE_NAME,strMethodName,params);
     }
 
     public List<Map<String,String>> getClasses(String strJson)

@@ -39,15 +39,11 @@ public class StudentesForJson {
         String strJson="";
         Map<String,String> params=new HashMap<String,String>();
         params.put("strNo",strNO);
-        ExecutorService exs= Executors.newCachedThreadPool();
-        Future<String> future=exs.submit(new MyThread(STUDENTS_WEB_SERVICE_NAME,STUDENT_OPERATOR_CHECKSTUDENTNO,params));
+        strJson=OperatorNetWork(STUDENT_OPERATOR_CHECKSTUDENTNO,params);
         try
         {
-            strJson=future.get();
             JSONArray jsonArray=new JSONArray(strJson);
-            Log.e("StudentsForJson",strJson);
             JSONObject jsonObject=jsonArray.getJSONObject(0);
-
             if("Yes".equals(jsonObject.get("Flag").toString().trim()))
             {
                 isExists=true;
@@ -69,6 +65,7 @@ public class StudentesForJson {
 
     public String OperatorNetWork(String strMethod,Map<String,String> params)
     {
+        /*
         String strMsg="";
 
         ExecutorService exs= Executors.newCachedThreadPool();
@@ -81,6 +78,8 @@ public class StudentesForJson {
             return "Error";
         }
         return strMsg;
+        */
+        return JSonOperator.getJSonStringForNetWork(STUDENTS_WEB_SERVICE_NAME,strMethod,params);
     }
 
     public String Login(Map<String, String> params)

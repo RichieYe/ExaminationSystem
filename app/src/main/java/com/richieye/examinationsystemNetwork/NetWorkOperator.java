@@ -29,9 +29,9 @@ public class NetWorkOperator {
     final String NAMESPACE = "http://www.ExaminationSystem.com/";//命名空间
 
 
-    public static boolean isNetworkAvailable(Activity activity)
+    public static boolean isNetworkAvailable(Context context)
     {
-        Context context=activity.getApplicationContext();
+        //Context context=activity.getApplicationContext();
 
         ConnectivityManager manager= (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 

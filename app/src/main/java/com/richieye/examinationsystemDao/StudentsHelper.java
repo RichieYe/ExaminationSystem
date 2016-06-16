@@ -29,7 +29,6 @@ public class StudentsHelper
     public void InsertStudent(List<Map<String,String>> list)
     {
         helper.Replace("tb_Students",list);
-        Log.e("StudentsHelper",list.toString());
     }
 
     public Map<String,String> getStudentForID(String ID)
@@ -40,6 +39,22 @@ public class StudentsHelper
     public TStudents Login(List<Map<String,String>> params)
     {
         Cursor myCursor=helper.Select("tb_Students",params);
-        return null;
+        TStudents tStudent=null;
+
+        if(myCursor.moveToFirst())
+        {
+            tStudent=new TStudents();
+            tStudent.setID(myCursor.getInt(myCursor.getColumnIndex("_id")));
+            tStudent.setNo(myCursor.getString(myCursor.getColumnIndex("No")));
+            tStudent.setUserName(myCursor.getString(myCursor.getColumnIndex("UserName")));
+            tStudent.setCID(myCursor.getInt(myCursor.getColumnIndex("CID")));
+            tStudent.setPassword(myCursor.getString(myCursor.getColumnIndex("password")));
+            tStudent.setGender(myCursor.getString(myCursor.getColumnIndex("gender")));
+            tStudent.setPhone(myCursor.getString(myCursor.getColumnIndex("phone")));
+            tStudent.setAddress(myCursor.getString(myCursor.getColumnIndex("address")));
+            tStudent.setLocalPath(myCursor.getString(myCursor.getColumnIndex("localpath")));
+            tStudent.setServicePath(myCursor.getString(myCursor.getColumnIndex("servicepath")));
+        }
+        return tStudent;
     }
 }
