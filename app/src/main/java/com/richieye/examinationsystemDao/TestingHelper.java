@@ -35,7 +35,7 @@ public class TestingHelper {
         isNetWork= PreferencesOperator.isNetworkState(mContext);
     }
 
-    public List<Map<String,String>> getTestingByID(int UID)
+    public List<Map<String,String>> getTestingByID(int UID,int Flag)
     {
         List<Map<String,String>>list=null;
 
@@ -49,6 +49,12 @@ public class TestingHelper {
         Map<String,String> map=new HashMap<>();
         map.put("SID",UID+"");
         params.add(map);
+        if(Flag!=-1)
+        {
+            map=new HashMap<>();
+            map.put("Flag",Flag+"");
+            params.add(map);
+        }
         Cursor myCursor=helper.Select("tb_Testing",params);
         list=convertListForCursor(myCursor);
         return list;
@@ -68,13 +74,11 @@ public class TestingHelper {
     public List<Map<String,String>> convertListForCursor(Cursor cursor)
     {
         List<Map<String,String>> list=null;
-        Log.e("TestingHelper1",cursor.getCount()+"");
         if(cursor.moveToFirst())
         {
-            Log.e("TestingHelper",cursor.getCount()+"");
             list=new ArrayList<>();
 
-            while(cursor.moveToNext())
+            for(int i=0;i<cursor.getCount();i++)
             {
                 Map<String,String> map=new HashMap<>();
                 map.put("_id",cursor.getString(cursor.getColumnIndex("_id")));
@@ -84,6 +88,7 @@ public class TestingHelper {
                 map.put("StartTime",cursor.getString(cursor.getColumnIndex("StartTime")));
                 map.put("EndTime",cursor.getString(cursor.getColumnIndex("EndTime")));
                 list.add(map);
+                cursor.moveToNext();
             }
         }
         return list;

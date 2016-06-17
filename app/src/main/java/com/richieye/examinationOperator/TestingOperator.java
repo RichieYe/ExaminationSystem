@@ -27,8 +27,8 @@ public class TestingOperator {
         //tJson=new TestingForJson(mContext);
     }
 
-    public List<Map<String,String>> getTestingByUID(int UID)
+    public List<Map<String,String>> getTestingByUID(int UID,int Flag)
     {
-        return helper.getTestingByID(UID);
+        return helper.getTestingByID(UID,Flag);
     }
 }

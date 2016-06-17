@@ -1,6 +1,7 @@
 package com.richieye.examinationAdapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import android.widget.TextView;
 
 import com.richieye.examinationsystem.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +27,13 @@ public class TestingAdapter extends BaseAdapter {
     List<Map<String,String>> list;
     Context mContent;
 
-    TextView tvID,tvTestDate,tvTestFlag,tvStartTime,tvEndTime;
+    TextView tvID,tvTestDate,tvTestFlag,tvStartTime,tvEndTime,tvItem;
+
+    public TestingAdapter(Context mContent,List<Map<String,String>>params)
+    {
+        this.mContent=mContent;
+        list=params;
+    }
 
     @Override
     public int getCount() {
@@ -49,23 +59,48 @@ public class TestingAdapter extends BaseAdapter {
         tvTestFlag= (TextView) layout.findViewById(R.id.tvTestingMainItem_Flag);
         tvStartTime= (TextView) layout.findViewById(R.id.tvTestingMainItem_StartTime);
         tvEndTime= (TextView) layout.findViewById(R.id.tvTestingMainItem_EndTime);
+        tvItem= (TextView) layout.findViewById(R.id.tvTestingMainItem_Item);
 
         tvID.setText(list.get(position).get("_id").toString());
         tvTestDate.setText(getTestDate(list.get(position).get("TestDate").toString()));
         tvTestFlag.setText(getFlag(list.get(position).get("Flag").toString()));
         tvStartTime.setText(getFormatTime(list.get(position).get("StartTime").toString()));
         tvEndTime.setText(getFormatTime(list.get(position).get("EndTime").toString()));
+        tvItem.setText(position+"");
         return layout;
     }
 
     private String getTestDate(String strDate)
     {
-        return "";
+
+        String strMsg="";
+        try {
+            Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(strDate);
+            strMsg=new SimpleDateFormat("yyyy年MM月dd日").format(date);
+        }catch (ParseException ex)
+        {
+            ex.printStackTrace();
+        }
+        return strMsg;
     }
 
     private String getFlag(String strFlag)
     {
-        return "";
+        String strMsg="未考";
+        if("0".equals(strFlag.trim()))
+        {
+            strMsg="未考";
+        }else if("1".equals(strFlag.trim()))
+        {
+            strMsg="正在考试";
+        }else if("2".equals(strFlag.trim()))
+        {
+            strMsg="已考";
+        }else
+        {
+            strMsg="有误！";
+        }
+        return strMsg;
     }
 
     private String getFormatTime(String strTime)

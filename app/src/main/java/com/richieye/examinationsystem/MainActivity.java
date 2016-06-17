@@ -8,12 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.richieye.examinationAdapter.MyItemDecoration;
 import com.richieye.examinationAdapter.RecyclerViewHeadAdapter;
+import com.richieye.examinationAdapter.TestingAdapter;
 import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationOperator.TestingOperator;
 import com.richieye.examinationOperator.UserOperator;
@@ -27,8 +30,10 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     TextView tvClassName, tvNo, tvName, tvGender, tvPhone, tvAddress, tvManager;
     CustomRoundImageView myHeadImage;
-    RecyclerView rvHead, rvItem;
     ListView lvTestingShow;
+
+    RadioGroup rgTesting;
+    RadioButton rbShowAll,rbShowUnFinish,rbShowExamin,rbShowFinished;
 
     LinearLayoutManager mHeadLayoutManager,mItemLayoutManager;
 
@@ -77,7 +82,37 @@ public class MainActivity extends AppCompatActivity {
         });
         myHeadImage=(CustomRoundImageView)findViewById(R.id.ivMainHead);
         lvTestingShow= (ListView) findViewById(R.id.lvMainShow);
+        rgTesting= (RadioGroup) findViewById(R.id.rgMainShowTesting);
+        rgTesting.setOnCheckedChangeListener(Testing_OnCheckedChangeListener);
+        rbShowAll= (RadioButton) findViewById(R.id.rbMainShowAll);
+        rbShowUnFinish= (RadioButton) findViewById(R.id.rbMainUnFinish);
+        rbShowExamin= (RadioButton) findViewById(R.id.rbMainExamin);
+        rbShowFinished= (RadioButton) findViewById(R.id.rbMainFinished);
     }
+
+    private RadioGroup.OnCheckedChangeListener Testing_OnCheckedChangeListener=new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            List<Map<String,String>> list=null;
+            switch (checkedId)
+            {
+                case R.id.rbMainShowAll:
+                    list=tOperator.getTestingByUID(tStudent.getID(),-1);
+                    break;
+                case R.id.rbMainUnFinish:
+                    list=tOperator.getTestingByUID(tStudent.getID(),0);
+                    break;
+                case R.id.rbMainExamin:
+                    list=tOperator.getTestingByUID(tStudent.getID(),1);
+                    break;
+                case R.id.rbMainFinished:
+                    list=tOperator.getTestingByUID(tStudent.getID(),2);
+                    break;
+            }
+            TestingAdapter myAdapter=new TestingAdapter(MainActivity.this,list);
+            lvTestingShow.setAdapter(myAdapter);
+        }
+    };
 
     private void initDatas() {
         tvClassName.setText(cOperator.getClassNameByID(tStudent.getCID()));
@@ -86,13 +121,17 @@ public class MainActivity extends AppCompatActivity {
         tvGender.setText(tStudent.getGender());
         tvPhone.setText(tStudent.getPhone());
         tvAddress.setText(tStudent.getAddress());
-        lstShow=tOperator.getTestingByUID(tStudent.getID());
+        lstShow=tOperator.getTestingByUID(tStudent.getID(),-1);
         if(lstShow!=null) {
+            TestingAdapter myAdapter=new TestingAdapter(this,lstShow);
+            /*
             SimpleAdapter myAdapter=new SimpleAdapter(this,lstShow,R.layout.testing_main_item,
                     new String[]{"_id","TestDate","Flag","StartTime","EndTime"},
                     new int[]{R.id.tvTestingMainItem_ID,R.id.tvTestingMainItem_Date,
                             R.id.tvTestingMainItem_Flag,R.id.tvTestingMainItem_StartTime,R.id.tvTestingMainItem_EndTime});
+                            */
             lvTestingShow.setAdapter(myAdapter);
+            Log.e("MainActivity1",lstShow.size()+"");
         }
     }
 }

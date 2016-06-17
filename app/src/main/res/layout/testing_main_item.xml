@@ -8,6 +8,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:orientation="horizontal"
+        android:background="#D3D3D3">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
@@ -46,6 +53,17 @@
             android:textStyle="bold"
             android:text="正在考试"
             android:ellipsize="start" />
+
+        <TextView
+            android:id="@+id/tvTestingMainItem_Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="0"
+            android:ellipsize="start"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
@@ -94,7 +112,8 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:text="分数："/>
+            android:text="分数："
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tvTestingMainItem_Score"
@@ -103,7 +122,8 @@
             android:layout_weight="1"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:text="100"/>
+            android:text="100"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
@@ -113,11 +133,4 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvTestingMainItem_ID"
         android:visibility="gone"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:orientation="horizontal"
-        android:background="#D3D3D3">
-    </LinearLayout>
 </LinearLayout>

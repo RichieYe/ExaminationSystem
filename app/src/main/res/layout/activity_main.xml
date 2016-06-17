@@ -197,6 +197,7 @@
         android:orientation="horizontal">
 
         <RadioGroup
+            android:id="@+id/rgMainShowTesting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -234,16 +235,12 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#D3D3D3">
-    </LinearLayout>
-
     <ListView
         android:id="@+id/lvMainShow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
     </ListView>
 
 </LinearLayout>
