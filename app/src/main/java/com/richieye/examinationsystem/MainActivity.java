@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -133,5 +134,21 @@ public class MainActivity extends AppCompatActivity {
             lvTestingShow.setAdapter(myAdapter);
             Log.e("MainActivity1",lstShow.size()+"");
         }
+
+        lvTestingShow.setOnItemClickListener(TestingShow_OnItemClickListener);
     }
+
+    private AdapterView.OnItemClickListener TestingShow_OnItemClickListener=new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent=new Intent(MainActivity.this,ShowTestInfoActivity.class);
+            intent.putExtra("SID",tStudent.getID()+"");
+            TextView tvTID= (TextView) view.findViewById(R.id.tvTestingMainItem_ID);
+            String sTID=tvTID.getText().toString();
+            intent.putExtra("TID",sTID);
+            Log.e("Mainactivity5",sTID);
+            startActivity(intent);
+        }
+    };
+
 }
