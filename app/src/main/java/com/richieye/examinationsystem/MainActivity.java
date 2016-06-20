@@ -3,20 +3,15 @@ package com.richieye.examinationsystem;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.richieye.examinationAdapter.MyItemDecoration;
-import com.richieye.examinationAdapter.RecyclerViewHeadAdapter;
 import com.richieye.examinationAdapter.TestingAdapter;
 import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationOperator.TestingOperator;
@@ -24,7 +19,6 @@ import com.richieye.examinationOperator.UserOperator;
 import com.richieye.examinationsystemCustomControl.CustomRoundImageView;
 import com.richieye.examinationsystemModel.TStudents;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
     RadioGroup rgTesting;
     RadioButton rbShowAll,rbShowUnFinish,rbShowExamin,rbShowFinished;
-
-    LinearLayoutManager mHeadLayoutManager,mItemLayoutManager;
 
     TStudents tStudent;
 
