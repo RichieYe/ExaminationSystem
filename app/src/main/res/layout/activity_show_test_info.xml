@@ -4,7 +4,7 @@
     android:id="@+id/activity_show_test_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:layout_margin="5dp"
     android:orientation="vertical"
     tools:context="com.richieye.examinationsystem.ShowTestInfoActivity">
 
@@ -14,6 +14,7 @@
 
         <TextView
             android:text="班级："
+            android:textSize="18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -21,18 +22,21 @@
             android:id="@+id/tvShowTestClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="18dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="学号："/>
+            android:text="学号："
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/tvShowTestNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="18dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -43,24 +47,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="姓名："/>
+            android:text="姓名："
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/tvShowTestName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="18dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="性别："/>
+            android:text="性别："
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/tvShowTestGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="18dp"/>
 
     </LinearLayout>
 
@@ -72,24 +80,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="18dp"
             android:text="考试时间："/>
 
         <TextView
             android:id="@+id/tvShowTestDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="18dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="状态："/>
+            android:text="状态："
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/tvShowTestFlag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="18dp"/>
 
     </LinearLayout>
 
@@ -101,24 +113,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开始时间："/>
+            android:text="开始时间："
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/tvShowTestStartTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="18dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="结束时间："/>
+            android:text="结束时间："
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/tvShowTestEndTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="18dp"/>
 
     </LinearLayout>
 
