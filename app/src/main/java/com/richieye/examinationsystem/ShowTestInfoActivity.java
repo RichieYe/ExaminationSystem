@@ -24,6 +24,9 @@ public class ShowTestInfoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_test_info);
+        userOperator=new UserOperator(this);
+        testingOperator=new TestingOperator(this);
+        classesOperator=new ClassesOperator(this);
         inits_control();
     }
 
