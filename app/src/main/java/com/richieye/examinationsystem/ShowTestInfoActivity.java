@@ -32,12 +32,14 @@ public class ShowTestInfoActivity extends Activity {
 
     private void inits_control()
     {
+        /*
         tvShowClass= (TextView) findViewById(R.id.tvShowTestClass);
         tvShowNo= (TextView) findViewById(R.id.tvShowTestNo);
         tvShowName= (TextView) findViewById(R.id.tvShowTestName);
         tvShowGender= (TextView) findViewById(R.id.tvShowTestGender);
         tvShowDate= (TextView) findViewById(R.id.tvShowTestGender);
         tvShowFlag= (TextView) findViewById(R.id.tvShowTestFlag);
+        */
         tvShowStartTime= (TextView) findViewById(R.id.tvShowTestStartTime);
         tvShowEndTime= (TextView) findViewById(R.id.tvShowTestEndTime);
         btnStart= (Button) findViewById(R.id.btnShowTestStart);
