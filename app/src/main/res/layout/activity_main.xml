@@ -235,12 +235,12 @@
 
     </LinearLayout>
 
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lvMainShow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-    </ListView>
+        android:layout_weight="1">
+
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </LinearLayout>

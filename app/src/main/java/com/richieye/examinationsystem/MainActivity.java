@@ -1,6 +1,7 @@
 package com.richieye.examinationsystem;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.richieye.examinationAdapter.TestingAdapter;
 import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationOperator.TestingOperator;
@@ -25,7 +28,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     TextView tvClassName, tvNo, tvName, tvGender, tvPhone, tvAddress, tvManager;
     CustomRoundImageView myHeadImage;
-    ListView lvTestingShow;
+    PullToRefreshListView lvTestingShow;
 
     RadioGroup rgTesting;
     RadioButton rbShowAll,rbShowUnFinish,rbShowExamin,rbShowFinished;
@@ -74,7 +77,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         myHeadImage=(CustomRoundImageView)findViewById(R.id.ivMainHead);
-        lvTestingShow= (ListView) findViewById(R.id.lvMainShow);
+        lvTestingShow= (PullToRefreshListView) findViewById(R.id.lvMainShow);
+        lvTestingShow.setMode(PullToRefreshBase.Mode.BOTH);
+
+        lvTestingShow.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                Log.e("MainActivity11111","11111111");
+                lvTestingShow.onRefreshComplete();
+                Log.e("MainActivity11111","22222222");
+                lvTestingShow.setRefreshing(false);
+            }
+        });
+
         rgTesting= (RadioGroup) findViewById(R.id.rgMainShowTesting);
         rgTesting.setOnCheckedChangeListener(Testing_OnCheckedChangeListener);
         rbShowAll= (RadioButton) findViewById(R.id.rbMainShowAll);

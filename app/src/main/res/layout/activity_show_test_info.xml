@@ -82,13 +82,7 @@
 
     </LinearLayout>
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/lvShowTestInfo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-        
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
 
     <Button
         android:id="@+id/btnShowTestStart"

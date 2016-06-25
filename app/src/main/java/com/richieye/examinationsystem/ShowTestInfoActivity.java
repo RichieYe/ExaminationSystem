@@ -43,7 +43,7 @@ public class ShowTestInfoActivity extends Activity {
         tvShowStartTime= (TextView) findViewById(R.id.tvShowTestStartTime);
         tvShowEndTime= (TextView) findViewById(R.id.tvShowTestEndTime);
         btnStart= (Button) findViewById(R.id.btnShowTestStart);
-        lvShow= (PullToRefreshListView) findViewById(R.id.lvShowTestInfo);
-        lvShow.setMode(PullToRefreshBase.Mode.BOTH);
+        //lvShow= (PullToRefreshListView) findViewById(R.id.lvShowTestInfo);
+        //lvShow.setMode(PullToRefreshBase.Mode.BOTH);
     }
 }
