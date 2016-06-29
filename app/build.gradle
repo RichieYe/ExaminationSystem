@@ -26,4 +26,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha2'
     testCompile 'junit:junit:4.12'
     compile project(path: ':PullToRefresh-library')
+    compile project(path:':PinnedHeaderListview-library')
 }

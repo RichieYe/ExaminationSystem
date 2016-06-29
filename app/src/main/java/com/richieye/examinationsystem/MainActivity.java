@@ -1,6 +1,7 @@
 package com.richieye.examinationsystem;
 
 import android.content.Intent;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.richieye.examinationsystemModel.TStudents;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Handler;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvClassName, tvNo, tvName, tvGender, tvPhone, tvAddress, tvManager;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     TestingOperator tOperator;
 
     List<Map<String,String>> lstShow;
+    int iFlag=-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         tvManager.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                lvTestingShow.onRefreshComplete();
                 Toast.makeText(MainActivity.this,"该功能尚未完成，敬请等待！",Toast.LENGTH_LONG).show();
             }
         });
@@ -80,13 +84,26 @@ public class MainActivity extends AppCompatActivity {
         lvTestingShow= (PullToRefreshListView) findViewById(R.id.lvMainShow);
         lvTestingShow.setMode(PullToRefreshBase.Mode.BOTH);
 
+        /*
         lvTestingShow.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                Log.e("MainActivity11111","11111111");
-                lvTestingShow.onRefreshComplete();
-                Log.e("MainActivity11111","22222222");
-                lvTestingShow.setRefreshing(false);
+                lstShow=tOperator.getTestingByUID(tStudent.getID(),iFlag);
+
+
+            }
+        });
+        */
+        lvTestingShow.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                lstShow=tOperator.getTestingByUID(tStudent.getID(),iFlag);
+                handler.sendEmptyMessage(0);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                handler.sendEmptyMessage(1);
             }
         });
 
@@ -105,16 +122,20 @@ public class MainActivity extends AppCompatActivity {
             switch (checkedId)
             {
                 case R.id.rbMainShowAll:
-                    list=tOperator.getTestingByUID(tStudent.getID(),-1);
+                    iFlag=-1;
+                    list=tOperator.getTestingByUID(tStudent.getID(),iFlag);
                     break;
                 case R.id.rbMainUnFinish:
-                    list=tOperator.getTestingByUID(tStudent.getID(),0);
+                    iFlag=0;
+                    list=tOperator.getTestingByUID(tStudent.getID(),iFlag);
                     break;
                 case R.id.rbMainExamin:
-                    list=tOperator.getTestingByUID(tStudent.getID(),1);
+                    iFlag=1;
+                    list=tOperator.getTestingByUID(tStudent.getID(),iFlag);
                     break;
                 case R.id.rbMainFinished:
-                    list=tOperator.getTestingByUID(tStudent.getID(),2);
+                    iFlag=2;
+                    list=tOperator.getTestingByUID(tStudent.getID(),iFlag);
                     break;
             }
             TestingAdapter myAdapter=new TestingAdapter(MainActivity.this,list);
@@ -155,6 +176,24 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("TID",sTID);
             Log.e("Mainactivity5",sTID);
             startActivity(intent);
+        }
+    };
+
+    private android.os.Handler handler=new android.os.Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what)
+            {
+                case 0:
+                    lvTestingShow.onRefreshComplete();
+                    Toast.makeText(MainActivity.this,"下拉刷新成功！",Toast.LENGTH_LONG).show();
+                    break;
+                case 1:
+                    lvTestingShow.onRefreshComplete();
+                    Toast.makeText(MainActivity.this,"上拉加载成功！",Toast.LENGTH_LONG).show();
+                    break;
+            }
         }
     };
 

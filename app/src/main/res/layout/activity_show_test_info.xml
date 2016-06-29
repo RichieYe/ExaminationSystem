@@ -82,7 +82,11 @@
 
     </LinearLayout>
 
-
+    <za.co.immedia.pinnedheaderlistview.PinnedHeaderListView
+        android:id="@+id/lvShowTestInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btnShowTestStart"
