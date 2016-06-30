@@ -1,13 +1,24 @@
 package com.richieye.examinationsystem;
 
 import android.app.Activity;
+import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.richieye.examinationAdapter.TestInfoAdapter;
+import com.richieye.examinationAdapter.TestInfoTypeAdapter;
 import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationOperator.TestingOperator;
 import com.richieye.examinationOperator.UserOperator;
@@ -23,10 +34,16 @@ public class ShowTestInfoActivity extends Activity {
     TextView tvShowDate,tvShowFlag,tvShowStartTime,tvShowEndTime;
     Button btnStart;
     PinnedHeaderListView phlvShow;
+    Spinner spShow;
 
     UserOperator userOperator;
     TestingOperator testingOperator;
     ClassesOperator classesOperator;
+
+    String[] strType={"填空题","选择题","多选题","判断题","编程题"};
+
+    TestInfoAdapter myAdapter;
+    boolean isSpinnerSelect=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +62,9 @@ public class ShowTestInfoActivity extends Activity {
         tvShowFlag=(TextView)findViewById(R.id.tvShowTestFlag);
         tvShowStartTime= (TextView) findViewById(R.id.tvShowTestStartTime);
         tvShowEndTime= (TextView) findViewById(R.id.tvShowTestEndTime);
-        btnStart= (Button) findViewById(R.id.btnShowTestStart);
+        btnStart= (Button) findViewById(R.id.btnShowTestStar);
         phlvShow= (PinnedHeaderListView) findViewById(R.id.lvShowTestInfo);
+        spShow= (Spinner) findViewById(R.id.spTestInfo_Type);
     }
 
     private void inits_data()
@@ -58,17 +76,61 @@ public class ShowTestInfoActivity extends Activity {
         {
             lstHeader.add("Header "+(i+1)+":");
             int max=rd.nextInt(20);
-            for(int j=0;j<15;j++)
+            List<String> lstSubItem=new ArrayList<>();
+            for(int j=0;j<10;j++)
             {
-                List<String> lstSubItem=new ArrayList<>();
+
                 lstSubItem.add((j+1)+"");
                 lstSubItem.add("Item:"+(j+1));
-                lstItems.add(lstSubItem);
 
+            }
+            lstItems.add(lstSubItem);
+        }
+
+        myAdapter=new TestInfoAdapter(lstHeader,lstItems);
+        phlvShow.setAdapter(myAdapter);
+        phlvShow.setOnScrollListener(new AbsListView.OnScrollListener() {
+            int firstVisibleItem=0;
+            int visibleItemCount=0;
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                spShow.setSelection(myAdapter.getSectionForPosition(firstVisibleItem+(visibleItemCount/2)));
+                isSpinnerSelect=true;
+                Log.e("ShowTestInfoActivity3",isSpinnerSelect+"");
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                isSpinnerSelect=false;
+                this.firstVisibleItem=firstVisibleItem;
+                this.visibleItemCount=visibleItemCount;
+
+            }
+        });
+
+        ArrayAdapter typeAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,strType);
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spShow.setAdapter(typeAdapter);
+        //spShow.setOnItemClickListener(spShow_Listener);
+        spShow.setOnItemSelectedListener(spShow_Listener);
+
+    }
+
+    private AdapterView.OnItemSelectedListener spShow_Listener=new AdapterView.OnItemSelectedListener() {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Log.e("ShowTestInfoActivity6",isSpinnerSelect+"");
+            if(isSpinnerSelect) {
+                phlvShow.setSelection(myAdapter.getSelectionForSection(position, 0));
             }
         }
 
-        TestInfoAdapter myAdapter=new TestInfoAdapter(lstHeader,lstItems);
-        phlvShow.setAdapter(myAdapter);
-    }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
 }

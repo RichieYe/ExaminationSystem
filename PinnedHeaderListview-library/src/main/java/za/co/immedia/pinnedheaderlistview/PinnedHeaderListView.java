@@ -3,6 +3,7 @@ package za.co.immedia.pinnedheaderlistview;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -196,5 +197,26 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
 
         public abstract void onSectionClick(AdapterView<?> adapterView, View view, int section, long id);
 
+    }
+
+    public int getSelectionForSection(int section,int position)
+    {
+        mAdapter.getSectionForPosition(section);
+        /*
+        if(section>=lsTestHeader.size()||section<0)
+        {
+            return 0;
+        }
+
+        int temp=0;
+        int i=0;
+        for(;i<section;i++)
+        {
+            temp+=lsTestItems.get(i).size();
+        }
+
+        return temp+position+i;
+        */
+        return 0;
     }
 }

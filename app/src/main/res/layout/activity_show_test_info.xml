@@ -83,9 +83,26 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <TextView
+            android:text="题目类型："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:textStyle="normal|bold" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spTestInfo_Type"
+            android:layout_weight="15.53"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center_vertical|center_horizontal|center" />
 
     </LinearLayout>
 
@@ -96,7 +113,7 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/btnShowTestStart"
+        android:id="@+id/btnShowTestStar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25dp"
