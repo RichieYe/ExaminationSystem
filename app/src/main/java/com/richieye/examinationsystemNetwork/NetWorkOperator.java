@@ -25,7 +25,7 @@ import java.util.Map;
 public class NetWorkOperator {
 
     //服务器IP
-    final String WEB_SERVICE_URL = "http://192.168.0.155:8081/";
+    final String WEB_SERVICE_URL = "http://192.168.1.155:8081/";
     final String NAMESPACE = "http://www.ExaminationSystem.com/";//命名空间
 
 
