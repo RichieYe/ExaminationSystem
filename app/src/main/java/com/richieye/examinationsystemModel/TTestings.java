@@ -57,6 +57,11 @@ public class TTestings {
 
     public String getStartTime()
     {
+        if("".equals(this._startTime.trim()))
+        {
+            return "未指定";
+        }
+
         return getFormatTime(this._startTime);
     }
 
@@ -69,6 +74,10 @@ public class TTestings {
 
     public String getEndTime()
     {
+        if ("".equals(this._endTime.trim())) {
+            return "未指定";
+        }
+
         return getFormatTime(this._endTime);
     }
 

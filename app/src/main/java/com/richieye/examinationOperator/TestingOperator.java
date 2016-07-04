@@ -6,6 +6,7 @@ import android.util.Log;
 import com.richieye.examinationSystemIO.PreferencesOperator;
 import com.richieye.examinationsystemDao.TestingHelper;
 import com.richieye.examinationsystemJson.TestingForJson;
+import com.richieye.examinationsystemModel.TTestings;
 
 import java.util.List;
 import java.util.Map;
@@ -32,5 +33,19 @@ public class TestingOperator {
         return helper.getTestingByID(UID,Flag);
     }
 
+    public TTestings getTestByTID(String strTID)
+    {
+        Map<String,String> map=helper.getTestByTID(strTID);
 
+        TTestings tTestings=new TTestings();
+        tTestings.setID(map.get("_id"));
+        tTestings.setSID(map.get("SID"));
+        tTestings.setTestDate(map.get("TestDate"));
+        tTestings.setFlag(Integer.parseInt(map.get("Flag")));
+        tTestings.setStartTime(map.get("StartTime"));
+        tTestings.setEndTime(map.get("EndTime"));
+
+        return tTestings;
+
+    }
 }

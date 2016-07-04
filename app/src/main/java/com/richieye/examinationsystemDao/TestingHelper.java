@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.richieye.examinationSystemIO.PreferencesOperator;
 import com.richieye.examinationsystemJson.TestingForJson;
+import com.richieye.examinationsystemModel.TTestings;
 import com.richieye.examinationsystemNetwork.NetWorkOperator;
 
 import java.util.ArrayList;
@@ -42,7 +43,6 @@ public class TestingHelper {
         if(isNetWork&& NetWorkOperator.isNetworkAvailable(mContext))
         {
             List<Map<String,String>>temp=tJson.getAllTestByUID(UID);
-            Log.e("TestingHelper2",temp.size()+"");
             InsertDBForService(temp);
         }
         List<Map<String,String>>params=new ArrayList<Map<String, String>>() ;
@@ -94,4 +94,22 @@ public class TestingHelper {
         return list;
     }
 
+    public Map<String,String> getTestByTID(String strTID) {
+        List<Map<String,String>>list=null;
+
+        if(isNetWork&& NetWorkOperator.isNetworkAvailable(mContext))
+        {
+            List<Map<String,String>>temp=tJson.getTestByTID(strTID);
+            Log.e("TestingHelper3",temp.size()+"");
+            InsertDBForService(temp);
+        }
+        List<Map<String,String>>params=new ArrayList<Map<String, String>>() ;
+        Map<String,String> map=new HashMap<>();
+        map.put("_id",strTID);
+        params.add(map);
+
+        Cursor myCursor=helper.Select("tb_Testing",params);
+        list=convertListForCursor(myCursor);
+        return list.get(0);
+    }
 }

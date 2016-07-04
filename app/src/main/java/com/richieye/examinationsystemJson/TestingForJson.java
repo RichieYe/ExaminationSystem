@@ -19,6 +19,7 @@ public class TestingForJson {
 
     final static String TESTING_WEB_SERVICE_NAME="Testing_Operator.asmx";
     public static String TESTING_OPERATOR_GETALLTESTFORSID="GetAllTestForSID";
+    public static String TESTING_OPERATOR_GETTESTFORID="GetTestForID";
 
     private Context mContent;
 
@@ -62,6 +63,14 @@ public class TestingForJson {
             }
         }
         return list;
+    }
+
+    public List<Map<String,String>> getTestByTID(String strTID)
+    {
+        Map<String,String> params=new HashMap<>();
+        params.put("ID  ",strTID);
+        String strMsg=JSonOperator.getJSonStringForNetWork(TESTING_WEB_SERVICE_NAME,TESTING_OPERATOR_GETTESTFORID,params);
+        return convertListForString(strMsg);
     }
 
 }

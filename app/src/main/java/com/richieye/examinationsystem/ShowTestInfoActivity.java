@@ -23,6 +23,7 @@ import com.richieye.examinationAdapter.TestInfoTypeAdapter;
 import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationOperator.TestingOperator;
 import com.richieye.examinationOperator.UserOperator;
+import com.richieye.examinationsystemModel.TTestings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +47,7 @@ public class ShowTestInfoActivity extends Activity {
     TestInfoAdapter myAdapter;
     boolean isSpinnerSelect=true;
     String strTID="";
+    TTestings tTestings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class ShowTestInfoActivity extends Activity {
         inits_control();
         if(intent!=null) {
             strTID=intent.getStringExtra("TID");
-            if("".equals(strTID.trim()))
+            if(!"".equals(strTID.trim()))
             {
                 inits_data();
             }
@@ -78,7 +80,13 @@ public class ShowTestInfoActivity extends Activity {
 
     private void inits_data()
     {
-
+        tTestings=testingOperator.getTestByTID(strTID);
+        if (tTestings!= null) {
+            tvShowDate.setText(tTestings.getTestDate());
+            tvShowFlag.setText(tTestings.getFlag());
+            tvShowStartTime.setText(tTestings.getStartTime());
+            tvShowEndTime.setText(tTestings.getEndTime());
+        }
         init_Spinner();
         init_PinnedHeaderListView();
     }
