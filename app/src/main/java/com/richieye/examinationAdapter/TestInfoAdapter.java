@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.richieye.examinationsystem.R;
+import com.richieye.examinationsystemModel.TUserTest;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,18 +25,19 @@ import za.co.immedia.pinnedheaderlistview.SectionedBaseAdapter;
 public class TestInfoAdapter extends SectionedBaseAdapter {
 
     List<String> lsTestHeader;
-    List<List<String>> lsTestItems;
+    List<List<TUserTest>> lsTestItems;
 
 
-    public TestInfoAdapter(List<String> lsTestHeader,List<List<String>> lsTestItems)
+    public TestInfoAdapter(List<String> lsTestHeader,List<List<TUserTest>> lsTestItems)
     {
         this.lsTestHeader=lsTestHeader;
         this.lsTestItems=lsTestItems;
+        Log.e("TestInfoAdapter1",lsTestItems.size()+"");
     }
 
     @Override
-    public Object getItem(int section, int position) {
-        return null;
+    public TUserTest getItem(int section, int position) {
+        return lsTestItems.get(section).get(position);
     }
 
     @Override
@@ -45,22 +47,13 @@ public class TestInfoAdapter extends SectionedBaseAdapter {
 
     @Override
     public int getSectionCount() {
+        Log.e("TestInfoAdapter2",lsTestHeader.size()+"");
         return lsTestHeader.size();
     }
 
     @Override
     public int getCountForSection(int section) {
-        /*
-        int count=0;
-        for(int i=0;i<lsTestItems.size();i++)
-        {
-            if(lsTestItems.get(i).size()>count)
-            {
-                count=lsTestItems.get(i).size();
-            }
-        }
-        return count;
-        */
+        Log.e("TestInfoAdapter3",lsTestItems.get(section).size()+"");
         return lsTestItems.get(section).size();
     }
 
@@ -76,11 +69,26 @@ public class TestInfoAdapter extends SectionedBaseAdapter {
             layout=(LinearLayout)convertView;
         }
 
+        TextView tvTestInfoID=(TextView)layout.findViewById(R.id.tvTestInfoID);
         TextView tvTestInfoMo= (TextView) layout.findViewById(R.id.tvTestInfoNo);
-        TextView tvTestInfoTitle=(TextView)layout.findViewById(R.id.tvTestInfoTitle);
-        tvTestInfoMo.setText(lsTestItems.get(section).get(position));
-        tvTestInfoTitle.setText(lsTestItems.get(section).get(position));
+        TextView tvTestInfoUAnswer=(TextView)layout.findViewById(R.id.tvTestInfoUAnswer);
+        TextView tvTestInfoFlag=(TextView)layout.findViewById(R.id.tvTestInfoFlag);
+        TUserTest tUserTest=lsTestItems.get(section).get(position);
+
+        Log.e("99999999","aaaaaaa"+position);
+
+        tvTestInfoID.setText(tUserTest.getID()+"");
+        tvTestInfoMo.setText((position+1)+"");
+        tvTestInfoUAnswer.setText(tUserTest.getUAnswer());
+        tvTestInfoFlag.setText("未设置");
+        //tvTestInfoMo.setText(lsTestItems.get(section).get(position));
+        //tvTestInfoTitle.setText(lsTestItems.get(section).get(position));
         return layout;
+    }
+
+    private String getFlagForUAnswer(String strUAnswer,String strTAnswer)
+    {
+        return "";
     }
 
     @Override

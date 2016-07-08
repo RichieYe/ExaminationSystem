@@ -32,13 +32,13 @@ public class UserTestHelper {
         isNetWork= PreferencesOperator.isNetworkState(mContext);
     }
 
-    public List<Map<String,String>> getTestByTID(int TID)
+    public List<Map<String,String>> getTestByTID(String strTID)
     {
         List<Map<String,String>> list=null;
 
         if(isNetWork&& NetWorkOperator.isNetworkAvailable(mContext))
         {
-            return userTestForJson.getTestByTID(TID);
+            //return userTestForJson.getTestByTID(strTID);
         }
 
         return null;

@@ -23,7 +23,10 @@ import com.richieye.examinationAdapter.TestInfoTypeAdapter;
 import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationOperator.TestingOperator;
 import com.richieye.examinationOperator.UserOperator;
+import com.richieye.examinationOperator.UserTestOperator;
 import com.richieye.examinationsystemModel.TTestings;
+import com.richieye.examinationsystemModel.TUserTest;
+import com.richieye.examinationsystemModel.TUserTest1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,8 +44,9 @@ public class ShowTestInfoActivity extends Activity {
     UserOperator userOperator;
     TestingOperator testingOperator;
     ClassesOperator classesOperator;
+    UserTestOperator userTestOperator;
 
-    String[] strType={"填空题","选择题","多选题","判断题","编程题"};
+    String[] strType={"一、填空题","二、选择题","三、多选题","四、判断题","五、编程题"};
 
     TestInfoAdapter myAdapter;
     boolean isSpinnerSelect=true;
@@ -56,6 +60,7 @@ public class ShowTestInfoActivity extends Activity {
         userOperator=new UserOperator(this);
         testingOperator=new TestingOperator(this);
         classesOperator=new ClassesOperator(this);
+        userTestOperator=new UserTestOperator(this);
         Intent intent=getIntent();
         inits_control();
         if(intent!=null) {
@@ -101,6 +106,25 @@ public class ShowTestInfoActivity extends Activity {
     private void init_PinnedHeaderListView() {
         List<String> lstHeader=new ArrayList<>();
         List<List<String>> lstItems=new ArrayList<>();
+        for(int i=0;i<strType.length;i++)
+        {
+            lstHeader.add(strType[i]);
+        }
+        List<List<TUserTest>> lstTests=userTestOperator.getTestByTID("1");
+
+        for(int i=0;i<lstTests.size();i++)
+        {
+            List<TUserTest> lstTemp=lstTests.get(i);
+
+            for(int j=0;j<lstTemp.size();j++)
+            {
+                Log.e("ShowTestInfo"+i+"    "+j,lstTemp.get(j).getUAnswer());
+            }
+
+            //Log.e("ShowTestInfo"+i,"aaaaa      "+lstTemp.size());
+        }
+
+        /*
         Random rd=new Random();
         for(int i=0;i<5;i++)
         {
@@ -116,7 +140,9 @@ public class ShowTestInfoActivity extends Activity {
             }
             lstItems.add(lstSubItem);
         }
-        myAdapter=new TestInfoAdapter(lstHeader,lstItems);
+        */
+
+        myAdapter=new TestInfoAdapter(lstHeader,lstTests);
         phlvShow.setAdapter(myAdapter);
     }
 

@@ -2,17 +2,57 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp">
+
+    <TextView
+        android:id="@+id/tvTestInfoID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <TextView
+        android:text="题号："
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp" />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvTestInfoNo" />
+        android:id="@+id/tvTestInfoNo"
+        android:layout_weight="1"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:text="你的答案："
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"/>
 
     <TextView
         android:text="TextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvTestInfoTitle" />
+        android:id="@+id/tvTestInfoUAnswer"
+        android:layout_weight="1"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:text="状态："
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tvTestInfoFlag"
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="18sp"/>
 </LinearLayout>
