@@ -26,6 +26,7 @@
         <activity android:name=".EditStudentAcitity" />
         <activity android:name=".ShowTestActivity" />
         <activity android:name=".ShowTestInfoActivity" />
+        <activity android:name=".StartTestingActivity"></activity>
     </application>
 
 </manifest>
