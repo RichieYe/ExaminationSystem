@@ -112,38 +112,9 @@ public class ShowTestInfoActivity extends Activity {
         }
         List<List<TUserTest>> lstTests=userTestOperator.getTestByTID("1");
 
-        for(int i=0;i<lstTests.size();i++)
-        {
-            List<TUserTest> lstTemp=lstTests.get(i);
-
-            for(int j=0;j<lstTemp.size();j++)
-            {
-                Log.e("ShowTestInfo"+i+"    "+j,lstTemp.get(j).getUAnswer());
-            }
-
-            //Log.e("ShowTestInfo"+i,"aaaaa      "+lstTemp.size());
-        }
-
-        /*
-        Random rd=new Random();
-        for(int i=0;i<5;i++)
-        {
-            lstHeader.add("Header "+(i+1)+":");
-            int max=rd.nextInt(20);
-            List<String> lstSubItem=new ArrayList<>();
-            for(int j=0;j<max;j++)
-            {
-
-                lstSubItem.add((j+1)+"");
-                lstSubItem.add("Item:"+(j+1));
-
-            }
-            lstItems.add(lstSubItem);
-        }
-        */
-
         myAdapter=new TestInfoAdapter(lstHeader,lstTests);
         phlvShow.setAdapter(myAdapter);
+        phlvShow.setOnItemClickListener(phlvShow_OnItemClickListener);
     }
 
     private AdapterView.OnItemSelectedListener spShow_Listener=new AdapterView.OnItemSelectedListener() {
@@ -156,6 +127,14 @@ public class ShowTestInfoActivity extends Activity {
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
 
+        }
+    };
+
+    private AdapterView.OnItemClickListener phlvShow_OnItemClickListener=new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent=new Intent(ShowTestInfoActivity.this,StartTestingActivity.class);
+            startActivity(intent);
         }
     };
 
