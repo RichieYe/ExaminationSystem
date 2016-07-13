@@ -2,36 +2,25 @@ package com.richieye.examinationsystem;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.richieye.examinationAdapter.TestInfoAdapter;
-import com.richieye.examinationAdapter.TestInfoTypeAdapter;
 import com.richieye.examinationOperator.ClassesOperator;
 import com.richieye.examinationOperator.TestingOperator;
 import com.richieye.examinationOperator.UserOperator;
 import com.richieye.examinationOperator.UserTestOperator;
 import com.richieye.examinationsystemModel.TTestings;
 import com.richieye.examinationsystemModel.TUserTest;
-import com.richieye.examinationsystemModel.TUserTest1;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 import za.co.immedia.pinnedheaderlistview.PinnedHeaderListView;
 

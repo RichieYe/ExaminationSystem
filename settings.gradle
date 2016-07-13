@@ -1,2 +1,2 @@
-include ':app' ,':PullToRefresh-library'
+include ':app', ':PullToRefresh-library', 'CountdownView-library'
 include ':PinnedHeaderListview-library'
