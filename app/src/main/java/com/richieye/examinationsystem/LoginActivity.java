@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.richieye.examinationCommon.Common;
 import com.richieye.examinationOperator.UserOperator;
 import com.richieye.examinationSystemIO.PreferencesOperator;
+import com.richieye.examinationsystemCustomControl.CustomRoundImageView;
 import com.richieye.examinationsystemModel.TClasses;
 import com.richieye.examinationsystemModel.TStudents;
 import com.richieye.examinationsystemNetwork.MyThread;
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     Spinner spClasses;
     Button btnLogin;
     ImageView ivShowUserNameErr,ivShowUserNoErr,ivShowUserPasswordErr;
-    ImageView ivShowHead;
+    CustomRoundImageView ivShowHead;
     CheckBox cbxRemember;
     int iClassID=0;
     RadioButton rbNetWork,rbLocal;
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         ivShowUserNoErr= (ImageView) findViewById(R.id.ivshowUserNoErr);
         ivShowUserNameErr= (ImageView) findViewById(R.id.ivShowUserNameErr);
         ivShowUserPasswordErr= (ImageView) findViewById(R.id.ivShowUserPasswordErr);
-        ivShowHead= (ImageView) findViewById(R.id.ivShowHead);
+        ivShowHead= (CustomRoundImageView) findViewById(R.id.ivShowHead);
         spClasses= (Spinner) findViewById(R.id.spClassName);
         etUserNo.setFocusable(true);
         btnLogin.setOnClickListener(listener);
@@ -204,7 +205,7 @@ public class LoginActivity extends AppCompatActivity {
         map.put("CId",iClassID+"");
         map.put("Password",etUserPassword.getText().toString().trim());
 
-        tStudents=uOperator.Login(map,rbNetWork.isChecked()?true:false);
+        tStudents=uOperator.Login(map, rbNetWork.isChecked());
 
         if(tStudents!=null)
         {

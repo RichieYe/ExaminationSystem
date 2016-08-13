@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_start_testing"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,20 +9,45 @@
     tools:context="com.richieye.examinationsystem.StartTestingActivity">
 
     <LinearLayout
+        android:id="@+id/llStartTesting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="5dp"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="#0099CC">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#000000"
+        android:text="考试剩下时间："
+        android:textSize="18sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="考试剩下时间："
-            android:textSize="20sp"/>
-
-
+    <cn.iwgang.countdownview.CountdownView
+        android:id="@+id/cvStartTestTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        app:isHideTimeBackground="true"
+        app:isShowDay="false"
+        app:isShowHour="true"
+        app:isShowMillisecond="true"
+        app:isShowMinute="true"
+        app:isShowSecond="true"
+        app:isShowTimeBgDivisionLine="false"
+        app:isTimeTextBold="true"
+        app:suffixGravity="center"
+        app:suffixTextColor="#000000"
+        app:suffixTextSize="20sp"
+        app:timeBgRadius="25dp"
+        app:timeBgSize="45dp"
+        app:timeTextColor="#000000"
+        app:timeTextSize="25sp" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,12 +56,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="题目编号："/>
+            android:text="题目类型："
+            android:gravity="center"
+            android:layout_gravity="center" />
 
         <Spinner
             android:id="@+id/spStartTestingType"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></Spinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="题目编号："
+            android:gravity="center"
+            android:layout_gravity="center" />
+
+        <Spinner
+            android:id="@+id/spStartTestingNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
         </Spinner>
     </LinearLayout>
@@ -44,7 +86,9 @@
         android:id="@+id/vpStartTestingContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
 
     </android.support.v4.view.ViewPager>
 

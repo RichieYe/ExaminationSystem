@@ -3,6 +3,7 @@ package com.richieye.examinationsystem;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,7 +25,7 @@ import java.util.List;
 
 import za.co.immedia.pinnedheaderlistview.PinnedHeaderListView;
 
-public class ShowTestInfoActivity extends Activity {
+public class ShowTestInfoActivity extends AppCompatActivity{
     TextView tvShowDate,tvShowFlag,tvShowStartTime,tvShowEndTime;
     Button btnStart;
     PinnedHeaderListView phlvShow;
@@ -81,6 +82,7 @@ public class ShowTestInfoActivity extends Activity {
             tvShowStartTime.setText(tTestings.getStartTime());
             tvShowEndTime.setText(tTestings.getEndTime());
         }
+
         init_Spinner();
         init_PinnedHeaderListView();
     }

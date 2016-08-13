@@ -24,8 +24,9 @@
         <activity android:name=".ShowStudentActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".EditStudentAcitity" />
-        <activity android:name=".ShowTestActivity" />
+        <activity android:name=".ShowTestActivity" />        
         <activity android:name=".ShowTestInfoActivity" />
+
         <activity android:name=".StartTestingActivity"></activity>
     </application>
 
